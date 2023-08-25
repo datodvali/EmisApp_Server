@@ -15,8 +15,9 @@ import java.sql.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence_generator")
+    @SequenceGenerator(name = "user_id_sequence_generator", sequenceName = "USER_ID_SEQUENCE", allocationSize = 1)
+    private Long id;
 
     private String firstName;
 
@@ -26,8 +27,14 @@ public class User {
 
     private String email;
 
-    private long studentId;
+    private String address;
 
-    private long teacherId;
+    private String phoneNumber;
+
+    @OneToOne(mappedBy = "user")
+    private Student student;
+
+    @OneToOne(mappedBy = "user")
+    private Teacher teacher;
 
 }
