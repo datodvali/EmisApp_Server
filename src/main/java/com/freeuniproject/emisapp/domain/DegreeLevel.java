@@ -2,7 +2,7 @@ package com.freeuniproject.emisapp.domain;
 
 public enum DegreeLevel {
 
-    BACHELORS,
+    BACHELOR,
 
     MASTERS,
 

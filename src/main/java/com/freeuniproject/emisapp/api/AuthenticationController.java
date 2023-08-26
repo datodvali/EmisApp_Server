@@ -13,6 +13,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public void handleLogin(@RequestParam String email, @RequestParam String password) {
+        throw new RuntimeException();
     }
 
 }

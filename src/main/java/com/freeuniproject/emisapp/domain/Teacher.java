@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -21,5 +23,8 @@ public class Teacher {
     private User user;
 
     private double salary;
+
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
+    private Set<TeacherSubject> subjects;
 
 }
