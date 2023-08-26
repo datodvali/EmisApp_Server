@@ -17,9 +17,9 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping("/get/{email}")
-    public TeacherDTO getTeacher(@PathVariable String email) {
-        return teacherService.getTeacherByEmail(email);
+    @GetMapping("/get/{teacherId}")
+    public TeacherDTO getTeacher(@PathVariable Long teacherId) {
+        return teacherService.getTeacher(teacherId);
     }
 
 }

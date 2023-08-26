@@ -9,6 +9,9 @@ import org.mapstruct.Mapping;
 public interface StudentFinancesMapper {
 
     @Mapping(source = "student.id", target = "studentId")
-    public StudentFinancesDTO toStudentFinancesDTO(StudentFinances finances);
+    StudentFinancesDTO toDTO(StudentFinances finances);
+
+    @Mapping(source = "studentId", target = "student.id")
+    StudentFinances fromDTO(StudentFinancesDTO dto);
 
 }

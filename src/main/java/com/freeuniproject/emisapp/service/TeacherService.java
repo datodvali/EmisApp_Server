@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 public interface TeacherService {
 
+    TeacherDTO getTeacher(Long teacherId);
+
     TeacherDTO getTeacherByEmail(String email);
 
 }

@@ -1,13 +1,22 @@
 package com.freeuniproject.emisapp.service;
 
 
+import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
+import com.freeuniproject.emisapp.dto.SubjectCardDTO;
 
 public interface StudentService {
 
-    public StudentDTO getStudentByEmail(String email);
+    StudentDTO getStudent(Long id);
 
-    public StudentFinancesDTO getStudentFinances(String email);
+    StudentDTO getStudentByEmail(String email);
 
+    void updateStudentStatus(Long id, StudentStatus studentStatus);
+
+    void updateStudentPhoneNumber(Long id, String phoneNumber);
+
+    StudentFinancesDTO getStudentFinances(Long id);
+
+    SubjectCardDTO getStudentSubjectCard(Long id);
 }
