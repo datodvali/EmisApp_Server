@@ -16,7 +16,4 @@ public interface StudentService {
 
     void updateStudentPhoneNumber(Long id, String phoneNumber);
 
-    StudentFinancesDTO getStudentFinances(Long id);
-
-    SubjectCardDTO getStudentSubjectCard(Long id);
 }

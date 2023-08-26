@@ -31,10 +31,10 @@ public class User {
 
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", optional = true)
     private Student student;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", optional = true)
     private Teacher teacher;
 
 }

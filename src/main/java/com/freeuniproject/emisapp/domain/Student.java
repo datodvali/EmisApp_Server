@@ -28,6 +28,8 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private DegreeLevel degreeLevel;
 
+    private int semester;
+
     private int credits;
 
     private double gpa;
