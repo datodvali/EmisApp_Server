@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SubjectCardDTO {
+public class StudentSubjectCardDTO {
 
     private long studentId;
 

@@ -3,7 +3,7 @@ package com.freeuniproject.emisapp.api;
 import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
-import com.freeuniproject.emisapp.dto.SubjectCardDTO;
+import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.StudentSubjectService;
@@ -25,29 +25,29 @@ public class StudentController {
         this.studentSubjectService = studentSubjectService;
     }
 
-    @GetMapping("/{id}")
-    public StudentDTO getStudent(@PathVariable Long id) {
+    @GetMapping
+    public StudentDTO getStudent(@RequestParam Long id) {
         return studentService.getStudent(id);
     }
 
-    @PutMapping("/{id}/update/status/{status}")
-    public void updateStatus(@PathVariable Long id, @PathVariable StudentStatus status) {
+    @PutMapping("/update/status")
+    public void updateStatus(@RequestParam Long id, @RequestParam StudentStatus status) {
         studentService.updateStudentStatus(id, status);
     }
 
-    @PutMapping("/{id}/update/phoneNumber/{phoneNumber}")
-    public void updatePhoneNumber(@PathVariable Long id, @PathVariable String phoneNumber) {
+    @PutMapping("/update/phoneNumber")
+    public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
         studentService.updateStudentPhoneNumber(id, phoneNumber);
     }
 
-    @GetMapping("/{id}/finances")
-    public StudentFinancesDTO getStudentFinances(@PathVariable Long id) {
+    @GetMapping("/finances")
+    public StudentFinancesDTO getStudentFinances(@RequestParam Long id) {
         return studentFinancesService.getStudentFinancesByStudentId(id);
     }
 
-    @GetMapping("/{id}/subjectCard")
-    public SubjectCardDTO getStudentSubjectCard(@PathVariable Long id) {
-        return studentSubjectService.getStudentSubjectCard(id);
+    @GetMapping("/subjectCard")
+    public StudentSubjectCardDTO getStudentSubjectCard(@RequestParam Long id) {
+        return studentSubjectService.getSubjectCard(id);
     }
 
 }

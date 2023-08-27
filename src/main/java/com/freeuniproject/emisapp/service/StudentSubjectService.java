@@ -1,9 +1,9 @@
 package com.freeuniproject.emisapp.service;
 
-import com.freeuniproject.emisapp.dto.SubjectCardDTO;
+import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
 
 public interface StudentSubjectService {
 
-    SubjectCardDTO getStudentSubjectCard(Long studentId);
+    StudentSubjectCardDTO getSubjectCard(Long studentId);
 
 }

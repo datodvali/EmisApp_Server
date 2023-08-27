@@ -18,8 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u JOIN FETCH u.teacher WHERE u.email = :email")
     public Optional<User> findTeacherUserByEmail(@Param("email") String email);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.phoneNumber = :phoneNumber WHERE u.id = :id")
-    void updatePhoneNumber(@Param("id") Long id, @Param("phoneNumber") String phoneNumber);
 }

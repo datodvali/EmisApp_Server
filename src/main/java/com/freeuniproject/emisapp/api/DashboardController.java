@@ -4,10 +4,7 @@ import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.domain.UserType;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.TeacherService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,14 +21,14 @@ public class DashboardController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping("/student/{id}/pages")
-    public List<DashboardComponent> getViewablePagesForStudent(@PathVariable Long id) {
-        return studentService.getViewablePages(id);
+    @GetMapping("/student/pages")
+    public List<DashboardComponent> getViewablePagesForStudent(@RequestParam Long studentId) {
+        return studentService.getViewablePages(studentId);
     }
 
-    @GetMapping("/teacher/{id}/pages")
-    public List<DashboardComponent> getViewablePagesForTeacher(@PathVariable Long id) {
-        return teacherService.getViewablePages(id);
+    @GetMapping("/teacher/pages")
+    public List<DashboardComponent> getViewablePagesForTeacher(@RequestParam Long teacherId) {
+        return teacherService.getViewablePages(teacherId);
     }
 
 }

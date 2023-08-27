@@ -1,13 +1,17 @@
 package com.freeuniproject.emisapp.impl;
 
 import com.freeuniproject.emisapp.domain.DashboardComponent;
+import com.freeuniproject.emisapp.domain.TeacherStatus;
 import com.freeuniproject.emisapp.dto.TeacherDTO;
+import com.freeuniproject.emisapp.dto.TeacherSubjectCardDTO;
+import com.freeuniproject.emisapp.dto.TeacherSubjectDTO;
 import com.freeuniproject.emisapp.mapper.TeacherMapper;
 import com.freeuniproject.emisapp.repository.TeacherRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
 import com.freeuniproject.emisapp.service.TeacherService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,4 +48,15 @@ public class TeacherServiceImpl implements TeacherService {
                 DashboardComponent.LIBRARY
         );
     }
+
+    @Override
+    public void updateTeacherStatus(Long id, TeacherStatus status) {
+        teacherRepository.updateStatus(id, status);
+    }
+
+    @Override
+    public void updateStudentPhoneNumber(Long id, String phoneNumber) {
+        teacherRepository.
+    }
+
 }

@@ -19,8 +19,15 @@ public class Teacher {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "name")
+    private TeacherPosition position;
+
+    @Enumerated(EnumType.STRING)
+    private TeacherStatus status;
 
     private double salary;
 

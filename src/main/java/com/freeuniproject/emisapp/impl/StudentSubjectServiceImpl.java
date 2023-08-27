@@ -1,16 +1,16 @@
 package com.freeuniproject.emisapp.impl;
 
-import com.freeuniproject.emisapp.domain.Grade;
 import com.freeuniproject.emisapp.domain.StudentSubject;
 import com.freeuniproject.emisapp.dto.StudentSubjectDTO;
-import com.freeuniproject.emisapp.dto.SubjectCardDTO;
-import com.freeuniproject.emisapp.dto.SubjectDTO;
+import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
 import com.freeuniproject.emisapp.mapper.StudentSubjectMapper;
 import com.freeuniproject.emisapp.repository.StudentSubjectRepository;
 import com.freeuniproject.emisapp.service.StudentSubjectService;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,9 +27,9 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
     }
 
     @Override
-    public SubjectCardDTO getStudentSubjectCard(Long studentId) {
+    public StudentSubjectCardDTO getSubjectCard(Long studentId) {
         List<StudentSubject> studentSubjects = studentSubjectRepository.findAllSubjectsByStudentId(studentId);
-        return new SubjectCardDTO(studentId, getSubjectsBySemester(studentSubjects));
+        return new StudentSubjectCardDTO(studentId, getSubjectsBySemester(studentSubjects));
 //        SubjectCardDTO subjectCardDTO = new SubjectCardDTO();
 //        subjectCardDTO.setStudentId(1L);
 //

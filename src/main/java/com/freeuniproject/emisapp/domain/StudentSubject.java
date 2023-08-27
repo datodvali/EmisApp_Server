@@ -22,10 +22,8 @@ public class StudentSubject {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
-
-    private int year;
+    @JoinColumn(name = "subjectClass_id")
+    private SubjectClass subjectClass;
 
     private int semester;
 

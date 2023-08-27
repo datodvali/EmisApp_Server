@@ -34,6 +34,8 @@ public class Student {
 
     private double gpa;
 
+    private int yearEnrolled;
+
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private StudentFinances finances;
 

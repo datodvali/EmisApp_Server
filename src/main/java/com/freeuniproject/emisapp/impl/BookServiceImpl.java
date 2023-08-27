@@ -6,6 +6,7 @@ import com.freeuniproject.emisapp.repository.BookRepository;
 import com.freeuniproject.emisapp.service.BookService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +24,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDTO> findBooks(String title, String author) {
-        return bookRepository.findBooksByTitleContainingAndAuthorContaining(title, author)
-                .stream().map(bookMapper::toDTO).collect(Collectors.toList());
+//        return bookRepository.findBooksByTitleContainingAndAuthorContaining(title, author)
+//                .stream().map(bookMapper::toDTO).collect(Collectors.toList());
+        return List.of(new BookDTO("book", "author", "http://someurl.com", Collections.emptyList()));
     }
 
 }

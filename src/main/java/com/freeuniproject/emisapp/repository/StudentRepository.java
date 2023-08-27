@@ -15,4 +15,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("UPDATE Student s SET s.status = :status WHERE s.id = :id")
     void updateStatus(@Param("id") Long id, @Param("status") StudentStatus status);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Student s SET s.user.phoneNumber = :phoneNumber WHERE s.id = :id")
+    void updatePhoneNumber(@Param("id") Long id, @Param("status") String phoneNumber);
+
 }

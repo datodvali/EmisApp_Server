@@ -20,6 +20,8 @@ public class Subject {
 
     private String name;
 
+    private String code;
+
     private String description;
 
     @ManyToMany

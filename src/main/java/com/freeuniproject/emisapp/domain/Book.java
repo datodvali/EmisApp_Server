@@ -1,9 +1,15 @@
 package com.freeuniproject.emisapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Book {
 

@@ -22,15 +22,7 @@ public class TeacherSubject {
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
-
-    private int year;
-
-    private int semester;
-
-    private Grade grade;
-
-    private double markInSubject;
+    @JoinColumn(name = "subjectClass_id")
+    private SubjectClass subjectClass;
 
 }

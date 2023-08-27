@@ -7,8 +7,8 @@ import lombok.*;
 import java.sql.Date;
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Setter
 @Getter
