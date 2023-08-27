@@ -5,7 +5,4 @@ import com.freeuniproject.emisapp.domain.UserType;
 import java.util.List;
 
 public interface UserService {
-
-    List<String> getViewablePagesOnDashboard(Long id, UserType userType);
-
 }
