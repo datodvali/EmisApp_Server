@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.impl;
 
 
+import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.domain.DegreeLevel;
 import com.freeuniproject.emisapp.domain.Grade;
 import com.freeuniproject.emisapp.domain.StudentStatus;
@@ -15,6 +16,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -75,6 +77,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void updateStudentPhoneNumber(Long id, String phoneNumber) {
         userRepository.updatePhoneNumber(id, phoneNumber);
+    }
+
+    @Override
+    public List<DashboardComponent> getViewablePages(Long id) {
+        // TODO actual implementation
+        return List.of(
+                DashboardComponent.SUBJECT_CARD_FOR_STUDENT,
+                DashboardComponent.SUBJECT_REGISTRATION,
+                DashboardComponent.LIBRARY
+        );
     }
 
 }

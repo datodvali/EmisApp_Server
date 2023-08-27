@@ -25,8 +25,11 @@ public class StudentSubject {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    private int year;
+
     private int semester;
 
+    @Enumerated(EnumType.STRING)
     private Grade grade;
 
     private double markInSubject;

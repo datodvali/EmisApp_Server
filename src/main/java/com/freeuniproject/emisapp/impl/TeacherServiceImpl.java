@@ -1,11 +1,14 @@
 package com.freeuniproject.emisapp.impl;
 
+import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.dto.TeacherDTO;
 import com.freeuniproject.emisapp.mapper.TeacherMapper;
 import com.freeuniproject.emisapp.repository.TeacherRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
 import com.freeuniproject.emisapp.service.TeacherService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -30,5 +33,15 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDTO getTeacherByEmail(String email) {
         return null;
+    }
+
+    @Override
+    public List<DashboardComponent> getViewablePages(Long id) {
+        // TODO actual implementation
+        return List.of(
+                DashboardComponent.SUBJECT_CARD_FOR_TEACHER,
+                DashboardComponent.SUBJECT_HISTORY_FOR_TEACHER,
+                DashboardComponent.LIBRARY
+        );
     }
 }

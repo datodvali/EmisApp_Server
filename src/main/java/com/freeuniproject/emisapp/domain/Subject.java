@@ -25,8 +25,8 @@ public class Subject {
     @ManyToMany
     @JoinTable(
             name = "prerequisite",
-            joinColumns = {@JoinColumn(name = "subjectId")},
-            inverseJoinColumns = {@JoinColumn(name = "prerequisiteId")}
+            joinColumns = {@JoinColumn(name = "subjectId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "prerequisiteId", referencedColumnName = "id")}
     )
     private Set<Subject> prerequisites;
 

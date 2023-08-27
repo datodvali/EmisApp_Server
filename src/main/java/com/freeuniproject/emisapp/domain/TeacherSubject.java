@@ -17,13 +17,15 @@ public class TeacherSubject {
     @SequenceGenerator(name = "teachersubject_id_sequence_generator", sequenceName = "TEACHERSUBJECT_ID_SEQUENCE", allocationSize = 1)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    private int year;
 
     private int semester;
 
