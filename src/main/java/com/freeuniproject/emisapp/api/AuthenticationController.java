@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     @PostMapping("/login")
-    public AuthenticationResponseDTO handleLogin(@RequestParam String email, @RequestParam String password) {
+    public AuthenticationResponseDTO login(@RequestParam String email, @RequestParam String password) {
         return new AuthenticationResponseDTO(true, UserType.STUDENT, 1L);
     }
 

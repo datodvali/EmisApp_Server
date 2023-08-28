@@ -13,10 +13,12 @@ public interface StudentService {
 
     StudentDTO getStudentByEmail(String email);
 
-    void updateStudentStatus(Long id, StudentStatus studentStatus);
+    void updateStatus(Long id, StudentStatus studentStatus);
 
-    void updateStudentPhoneNumber(Long id, String phoneNumber);
+    void updatePhoneNumber(Long id, String phoneNumber);
 
     List<DashboardComponent> getViewablePages(Long id);
+
+    void updatePassword(Long id, String password);
 
 }

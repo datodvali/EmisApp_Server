@@ -32,12 +32,12 @@ public class StudentController {
 
     @PutMapping("/update/status")
     public void updateStatus(@RequestParam Long id, @RequestParam StudentStatus status) {
-        studentService.updateStudentStatus(id, status);
+        studentService.updateStatus(id, status);
     }
 
     @PutMapping("/update/phoneNumber")
     public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
-        studentService.updateStudentPhoneNumber(id, phoneNumber);
+        studentService.updatePhoneNumber(id, phoneNumber);
     }
 
     @GetMapping("/finances")
@@ -49,5 +49,11 @@ public class StudentController {
     public StudentSubjectCardDTO getStudentSubjectCard(@RequestParam Long id) {
         return studentSubjectService.getSubjectCard(id);
     }
+
+    @PutMapping("/update/password")
+    public void updatePassword(@RequestParam Long id, @RequestParam String password) {
+        studentService.updatePassword(id, password);
+    }
+
 
 }

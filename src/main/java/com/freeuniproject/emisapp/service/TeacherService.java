@@ -18,7 +18,7 @@ public interface TeacherService {
 
     List<DashboardComponent> getViewablePages(Long id);
 
-    void updateTeacherStatus(Long id, TeacherStatus status);
+    void updateStatus(Long id, TeacherStatus status);
 
-    void updateStudentPhoneNumber(Long id, String phoneNumber);
+    void updatePhoneNumber(Long id, String phoneNumber);
 }

@@ -1,6 +1,5 @@
 package com.freeuniproject.emisapp.api;
 
-import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.domain.TeacherStatus;
 import com.freeuniproject.emisapp.dto.TeacherDTO;
 import com.freeuniproject.emisapp.dto.TeacherSubjectCardDTO;
@@ -39,14 +38,14 @@ public class TeacherController {
         return teacherSubjectService.getTeachingHistory(id);
     }
 
-    @PutMapping("/update/status/")
+    @PutMapping("/update/status")
     public void updateStatus(@RequestParam Long id, @RequestParam TeacherStatus status) {
-        teacherService.updateTeacherStatus(id, status);
+        teacherService.updateStatus(id, status);
     }
 
-    @PutMapping("/update/phoneNumber/")
+    @PutMapping("/update/phoneNumber")
     public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
-        teacherService.updateStudentPhoneNumber(id, phoneNumber);
+        teacherService.updatePhoneNumber(id, phoneNumber);
     }
 
 }

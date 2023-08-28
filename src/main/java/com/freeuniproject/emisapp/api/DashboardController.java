@@ -22,13 +22,13 @@ public class DashboardController {
     }
 
     @GetMapping("/student/pages")
-    public List<DashboardComponent> getViewablePagesForStudent(@RequestParam Long studentId) {
-        return studentService.getViewablePages(studentId);
+    public List<DashboardComponent> getViewablePagesForStudent(@RequestParam Long id) {
+        return studentService.getViewablePages(id);
     }
 
     @GetMapping("/teacher/pages")
-    public List<DashboardComponent> getViewablePagesForTeacher(@RequestParam Long teacherId) {
-        return teacherService.getViewablePages(teacherId);
+    public List<DashboardComponent> getViewablePagesForTeacher(@RequestParam Long id) {
+        return teacherService.getViewablePages(id);
     }
 
 }

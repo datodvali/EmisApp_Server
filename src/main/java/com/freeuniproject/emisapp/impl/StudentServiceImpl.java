@@ -4,11 +4,11 @@ package com.freeuniproject.emisapp.impl;
 import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.domain.DegreeLevel;
 import com.freeuniproject.emisapp.domain.StudentStatus;
-import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.mapper.StudentMapper;
-import com.freeuniproject.emisapp.mapper.UserToStudentDTOMapper;
 import com.freeuniproject.emisapp.repository.StudentRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
+import com.freeuniproject.emisapp.service.MailService;
 import com.freeuniproject.emisapp.service.StudentService;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +25,13 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentMapper studentMapper, UserRepository userRepository, StudentRepository studentRepository) {
+    private final MailService mailService;
+
+    public StudentServiceImpl(StudentMapper studentMapper, UserRepository userRepository, StudentRepository studentRepository, MailService mailService) {
         this.studentMapper = studentMapper;
         this.userRepository = userRepository;
         this.studentRepository = studentRepository;
+        this.mailService = mailService;
     }
 
     @Override
@@ -56,13 +59,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudentStatus(Long id, StudentStatus studentStatus) {
+    public void updateStatus(Long id, StudentStatus studentStatus) {
         studentRepository.updateStatus(id, studentStatus);
     }
 
     @Override
-    public void updateStudentPhoneNumber(Long id, String phoneNumber) {
-        studentRepository.updatePhoneNumber(id, phoneNumber);
+    public void updatePhoneNumber(Long id, String phoneNumber) {
+        userRepository.updatePhoneNumberByStudentId(id, phoneNumber);
     }
 
     @Override
@@ -73,6 +76,11 @@ public class StudentServiceImpl implements StudentService {
                 DashboardComponent.SUBJECT_REGISTRATION,
                 DashboardComponent.LIBRARY
         );
+    }
+
+    @Override
+    public void updatePassword(Long id, String password) {
+        // TODO actual implementation
     }
 
 }

@@ -16,9 +16,4 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     @Query("UPDATE Teacher t SET t.status = :status WHERE t.id = :id")
     void updateStatus(@Param("id") Long id, @Param("status") TeacherStatus status);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE Teacher t SET t.user.phoneNumber = :phoneNumber WHERE t.id = :id")
-    void updatePhoneNumber(@Param("id") Long id, @Param("status") String phoneNumber);
-
 }
