@@ -24,6 +24,9 @@ public class Book {
 
     private String description;
 
+    @Lob
+    private byte[] content;
+
     @ElementCollection
     @CollectionTable(name = "genres_to_books", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     @Column(name = "genre", nullable = false)
