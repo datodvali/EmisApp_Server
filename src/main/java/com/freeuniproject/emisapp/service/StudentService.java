@@ -11,11 +11,7 @@ public interface StudentService {
 
     StudentDTO getStudent(Long id);
 
-    StudentDTO getStudentByEmail(String email);
-
     void updateStatus(Long id, StudentStatus studentStatus);
-
-    void updatePhoneNumber(Long id, String phoneNumber);
 
     List<DashboardComponent> getViewablePages(Long id);
 

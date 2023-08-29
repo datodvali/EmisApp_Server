@@ -21,4 +21,14 @@ public class UserServiceImpl implements UserService {
         this.teacherRepository = teacherRepository;
     }
 
+    @Override
+    public void updatePhoneNumber(Long id, String phoneNumber) {
+        userRepository.updatePhoneNumber(id, phoneNumber);
+    }
+
+    @Override
+    public void updatePassword(Long id, String password) {
+        // TODO implement
+    }
+
 }

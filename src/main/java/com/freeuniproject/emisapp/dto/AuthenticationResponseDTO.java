@@ -18,4 +18,6 @@ public class AuthenticationResponseDTO {
 
     private long userId;
 
+    private long idByRole;
+
 }

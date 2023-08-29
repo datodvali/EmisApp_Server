@@ -31,10 +31,6 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherRepository.findById(teacherId).map(teacherMapper::toDTO).orElse(null);
     }
 
-    @Override
-    public TeacherDTO getTeacherByEmail(String email) {
-        return null;
-    }
 
     @Override
     public List<DashboardComponent> getViewablePages(Long id) {
@@ -49,11 +45,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void updateStatus(Long id, TeacherStatus status) {
         teacherRepository.updateStatus(id, status);
-    }
-
-    @Override
-    public void updatePhoneNumber(Long id, String phoneNumber) {
-        userRepository.updatePhoneNumberByTeacherId(id, phoneNumber);
     }
 
 }

@@ -43,9 +43,4 @@ public class TeacherController {
         teacherService.updateStatus(id, status);
     }
 
-    @PutMapping("/update/phoneNumber")
-    public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
-        teacherService.updatePhoneNumber(id, phoneNumber);
-    }
-
 }

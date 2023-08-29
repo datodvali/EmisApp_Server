@@ -7,7 +7,9 @@ import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.StudentSubjectService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/emis/api/student")
@@ -35,11 +37,6 @@ public class StudentController {
         studentService.updateStatus(id, status);
     }
 
-    @PutMapping("/update/phoneNumber")
-    public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
-        studentService.updatePhoneNumber(id, phoneNumber);
-    }
-
     @GetMapping("/finances")
     public StudentFinancesDTO getStudentFinances(@RequestParam Long id) {
         return studentFinancesService.getStudentFinancesByStudentId(id);
@@ -49,11 +46,5 @@ public class StudentController {
     public StudentSubjectCardDTO getStudentSubjectCard(@RequestParam Long id) {
         return studentSubjectService.getSubjectCard(id);
     }
-
-    @PutMapping("/update/password")
-    public void updatePassword(@RequestParam Long id, @RequestParam String password) {
-        studentService.updatePassword(id, password);
-    }
-
 
 }

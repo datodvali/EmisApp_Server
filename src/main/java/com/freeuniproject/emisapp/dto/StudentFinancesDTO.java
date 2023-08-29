@@ -23,5 +23,4 @@ public class StudentFinancesDTO {
 
     private double debt;
 
-
 }
