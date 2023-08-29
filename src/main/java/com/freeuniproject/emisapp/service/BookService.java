@@ -3,12 +3,12 @@ package com.freeuniproject.emisapp.service;
 import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BookService {
 
-    List<BookInfoDTO> findBooks(String title, String author);
+    Page<BookInfoDTO> findBooks(String title, String author, Pageable pageable);
 
     BookDTO findBook(Long id);
 

@@ -5,6 +5,8 @@ import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
 import com.freeuniproject.emisapp.service.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,8 +34,9 @@ public class LibraryController {
     }
 
     @GetMapping("/find")
-    public List<BookInfoDTO> findBooks(@RequestParam String title, @RequestParam String author) {
-        return bookService.findBooks(title, author);
+    public Page<BookInfoDTO> findBooks(@RequestParam String title, @RequestParam String author,
+                                       @RequestParam Integer page, @RequestParam Integer size) {
+        return bookService.findBooks(title, author, PageRequest.of(page, size));
     }
 
     @PostMapping("/upload")

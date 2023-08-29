@@ -1,5 +1,6 @@
 package com.freeuniproject.emisapp.impl;
 
+import com.freeuniproject.emisapp.domain.Book;
 import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
@@ -8,10 +9,14 @@ import com.freeuniproject.emisapp.mapper.BookMapper;
 import com.freeuniproject.emisapp.mapper.BookUploadRequestMapper;
 import com.freeuniproject.emisapp.repository.BookRepository;
 import com.freeuniproject.emisapp.service.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -32,10 +37,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookInfoDTO> findBooks(String title, String author) {
-//        return bookRepository.findBooksByTitleContainingAndAuthorContaining(title, author)
-//                .stream().map(bookMapper::toDTO).collect(Collectors.toList());
-        return List.of(new BookInfoDTO(1L, "author", "http://someurl.com", Collections.emptyList()));
+    public Page<BookInfoDTO> findBooks(String title, String author, Pageable pageable) {
+        Page<Book> resultPage = bookRepository.findBooksByTitleAndAuthor(title, author, pageable);
+        List<BookInfoDTO> result = resultPage
+                .stream().map(bookInfoMapper::toDTO).collect(Collectors.toList());
+        return new PageImpl<>(result, PageRequest.of(pageable.getPageNumber(), result.size()), resultPage.getTotalElements());
     }
 
     @Override
