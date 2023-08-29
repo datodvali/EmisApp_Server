@@ -11,6 +11,7 @@ import lombok.Setter;
 @Entity
 public class StudentFinances {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_finances_id_sequence_generator")
     @SequenceGenerator(name = "student_finances_id_sequence_generator", sequenceName = "STUDENT_FINANCES_ID_SEQUENCE", allocationSize = 1)
@@ -22,8 +23,12 @@ public class StudentFinances {
 
     private double tuitionFee;
 
+    private double scholarship;
+
+    private double effectiveFee;
+
     private double tuitionFeePaid;
 
-    private double scholarship;
+    private double debt;
 
 }

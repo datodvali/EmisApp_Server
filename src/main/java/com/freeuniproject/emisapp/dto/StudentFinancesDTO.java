@@ -15,9 +15,13 @@ public class StudentFinancesDTO {
 
     private double tuitionFee;
 
+    private double scholarship;
+
+    private double effectiveFee;
+
     private double tuitionFeePaid;
 
-    private double scholarship;
+    private double debt;
 
 
 }
