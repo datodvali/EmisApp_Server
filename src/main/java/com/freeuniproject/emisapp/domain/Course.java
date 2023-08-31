@@ -28,4 +28,6 @@ public class Course {
 
     private int studentLimit;
 
+    private boolean finished;
+
 }

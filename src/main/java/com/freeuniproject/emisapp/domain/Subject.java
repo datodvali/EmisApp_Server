@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -30,6 +31,14 @@ public class Subject {
             joinColumns = {@JoinColumn(name = "subjectId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "prerequisiteId", referencedColumnName = "id")}
     )
-    private Set<Subject> prerequisites;
+    private List<Subject> prerequisites;
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Subject s)) {
+            return false;
+        }
+        return this.id.equals(s.id);
+    }
 
 }

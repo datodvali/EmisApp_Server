@@ -34,6 +34,8 @@ public class StudentSubject {
 
     private double markInSubject;
 
+    private boolean passed;
+
     @OneToMany(mappedBy = "studentSubject")
     private List<StudentGrade> gradeComponents;
 
