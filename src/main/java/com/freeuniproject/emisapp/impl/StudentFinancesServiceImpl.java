@@ -22,12 +22,6 @@ public class StudentFinancesServiceImpl implements StudentFinancesService {
     public StudentFinancesDTO getStudentFinancesByStudentId(Long studentId) {
         return studentFinancesRepository.getStudentFinancesByStudentId(studentId)
                 .map(studentFinancesMapper::toDTO).orElse(null);
-//        return StudentFinancesDTO.builder()
-//                .id(1L)
-//                .studentId(1L)
-//                .tuitionFee(6500)
-//                .tuitionFeePaid(3000)
-//                .scholarship(3500).build();
     }
 
 }
