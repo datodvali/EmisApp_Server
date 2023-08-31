@@ -15,7 +15,8 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public AuthenticationResponseDTO login(@RequestParam String email, @RequestParam String password) {
-        return new AuthenticationResponseDTO(true, UserType.STUDENT, 1L);
+        // TODO actual implementation
+        return new AuthenticationResponseDTO(true, UserType.STUDENT, 1L, 1L);
     }
 
 }

@@ -11,26 +11,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
 
-@Controller
-@RequestMapping("emis/api/library")
+@RestController
+@RequestMapping("/emis/api/library")
 public class LibraryController {
 
     private final String LIBRARY_PATH = "";
 
     private final BookService bookService;
 
-    private final Book book;
-
     public LibraryController(BookService bookService) {
         this.bookService = bookService;
-        book = new Book();
     }
 
     @GetMapping("/find")

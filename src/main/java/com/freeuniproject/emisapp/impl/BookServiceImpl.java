@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.impl;
 
 import com.freeuniproject.emisapp.domain.Book;
+import com.freeuniproject.emisapp.domain.BookInfoProjection;
 import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
@@ -9,6 +10,7 @@ import com.freeuniproject.emisapp.mapper.BookMapper;
 import com.freeuniproject.emisapp.mapper.BookUploadRequestMapper;
 import com.freeuniproject.emisapp.repository.BookRepository;
 import com.freeuniproject.emisapp.service.BookService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -36,11 +38,12 @@ public class BookServiceImpl implements BookService {
         this.bookUploadRequestMapper = bookUploadRequestMapper;
     }
 
+    @Transactional
     @Override
     public Page<BookInfoDTO> findBooks(String title, String author, Pageable pageable) {
-        Page<Book> resultPage = bookRepository.findBooksByTitleAndAuthor(title, author, pageable);
+        Page<BookInfoProjection> resultPage = bookRepository.findBooksByTitleAndAuthor(title, author, pageable);
         List<BookInfoDTO> result = resultPage
-                .stream().map(bookInfoMapper::toDTO).collect(Collectors.toList());
+                .stream().map(this::fromProjectionToDTO).collect(Collectors.toList());
         return new PageImpl<>(result, PageRequest.of(pageable.getPageNumber(), result.size()), resultPage.getTotalElements());
     }
 
@@ -53,5 +56,15 @@ public class BookServiceImpl implements BookService {
     public void addToLibrary(BookUploadRequestBodyDTO book) {
         bookRepository.save(bookUploadRequestMapper.fromDTO(book));
     }
+
+    private BookInfoDTO fromProjectionToDTO(BookInfoProjection projection) {
+        BookInfoDTO dto = new BookInfoDTO();
+        dto.setId(projection.getId());
+        dto.setTitle(projection.getTitle());
+        dto.setAuthor(projection.getAuthor());
+        dto.setGenres(projection.getGenres());
+        return dto;
+    }
+
 
 }
