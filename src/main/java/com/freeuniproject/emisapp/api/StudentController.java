@@ -4,12 +4,15 @@ import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
 import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
+import com.freeuniproject.emisapp.dto.StudentSubjectDTO;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.StudentSubjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/emis/api/student")
@@ -45,6 +48,16 @@ public class StudentController {
     @GetMapping("/subjectCard")
     public StudentSubjectCardDTO getStudentSubjectCard(@RequestParam Long id) {
         return studentSubjectService.getSubjectCard(id);
+    }
+
+    @GetMapping("/class")
+    public List<StudentSubjectDTO> getStudentsInfoForClass(@RequestParam Long classId) {
+        return studentSubjectService.getStudentsInfoForClass(classId);
+    }
+
+    @PutMapping("update/student/points")
+    public void updateStudentPoints(@RequestParam Long studentGradeId, @RequestParam Double points) {
+
     }
 
 }

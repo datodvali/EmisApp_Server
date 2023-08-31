@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @Setter
@@ -22,8 +24,8 @@ public class StudentSubject {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "subjectClass_id")
-    private SubjectClass subjectClass;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     private int semester;
 
@@ -31,5 +33,8 @@ public class StudentSubject {
     private Grade grade;
 
     private double markInSubject;
+
+    @OneToMany(mappedBy = "studentSubject")
+    private List<StudentGrade> gradeComponents;
 
 }

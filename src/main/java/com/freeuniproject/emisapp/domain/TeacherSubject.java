@@ -22,7 +22,7 @@ public class TeacherSubject {
     private Teacher teacher;
 
     @ManyToOne
-    @JoinColumn(name = "subjectClass_id")
-    private SubjectClass subjectClass;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 }

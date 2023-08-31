@@ -11,11 +11,11 @@ public class GradeComponent {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "subjectclass_id")
-    private SubjectClass subjectClass;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     private String name;
 
-    private int totalPoints;
+    private double totalPoints;
 
 }

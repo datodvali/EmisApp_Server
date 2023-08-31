@@ -10,7 +10,7 @@ import java.util.List;
 public interface TeacherSubjectRepository extends JpaRepository<TeacherSubject, Long> {
 
     @Query("SELECT t FROM TeacherSubject t WHERE t.teacher.id = :teacherId" +
-            " AND t.subjectClass.year = :year AND t.subjectClass.semester = :semester")
+            " AND t.course.year = :year AND t.course.semester = :semester")
     List<TeacherSubject> findByTeacherYearAndSemester(@Param("teacherId") long teacherId, @Param("year") int year, @Param("semester") int semester);
 
     List<TeacherSubject> findByTeacherId(long teacherId);

@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class SubjectClass {
+public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subjectclass_id_sequence_generator")
-    @SequenceGenerator(name = "subjectclass_id_sequence_generator", sequenceName = "SUBJECTCLASS_ID_SEQUENCE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_id_sequence_generator")
+    @SequenceGenerator(name = "course_id_sequence_generator", sequenceName = "COURSE_ID_SEQUENCE", allocationSize = 1)
     private Long id;
 
     @ManyToOne

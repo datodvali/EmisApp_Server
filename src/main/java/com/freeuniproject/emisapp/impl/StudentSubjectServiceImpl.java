@@ -30,36 +30,12 @@ public class StudentSubjectServiceImpl implements StudentSubjectService {
     public StudentSubjectCardDTO getSubjectCard(Long studentId) {
         List<StudentSubject> studentSubjects = studentSubjectRepository.findAllSubjectsByStudentId(studentId);
         return new StudentSubjectCardDTO(studentId, getSubjectsBySemester(studentSubjects));
-//        SubjectCardDTO subjectCardDTO = new SubjectCardDTO();
-//        subjectCardDTO.setStudentId(1L);
-//
-//        StudentSubjectDTO studentSubjectDTO1 = new StudentSubjectDTO();
-//        studentSubjectDTO1.setId(1L);
-//        studentSubjectDTO1.setStudentId(1L);
-//        studentSubjectDTO1.setGrade(Grade.A);
-//        studentSubjectDTO1.setMarkInSubject(91.2);
-//        studentSubjectDTO1.setSemester(1);
-//        studentSubjectDTO1.setSubject(
-//                new SubjectDTO(1L, "biology", "introductory course in biology",
-//                        Collections.singletonList("Carl linnaeus"))
-//        );
-//
-//        StudentSubjectDTO studentSubjectDTO2 = new StudentSubjectDTO();
-//        studentSubjectDTO2.setId(2L);
-//        studentSubjectDTO2.setStudentId(2L);
-//        studentSubjectDTO2.setGrade(Grade.B);
-//        studentSubjectDTO2.setMarkInSubject(85.2);
-//        studentSubjectDTO2.setSemester(2);
-//        studentSubjectDTO2.setSubject(
-//                new SubjectDTO(1L, "physics", "introductory course in physics",
-//                        Collections.singletonList("richard feynman"))
-//        );
-//
-//        subjectCardDTO.setSubjectsBySemester(Arrays.asList(
-//                Collections.singletonList(studentSubjectDTO1),
-//                Collections.singletonList(studentSubjectDTO2)
-//        ));
-//        return subjectCardDTO;
+    }
+
+    @Override
+    public List<StudentSubjectDTO> getStudentsInfoForClass(Long classId) {
+//        return studentSubjectRepository.findByClassId(classId);
+        return null;
     }
 
     private List<List<StudentSubjectDTO>> getSubjectsBySemester(List<StudentSubject> studentSubjects) {
