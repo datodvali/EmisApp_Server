@@ -4,15 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @NoArgsConstructor
 @Setter
 @Getter
-public class TeacherSubjectCardDTO {
+public class TeacherCourseDTO {
 
     private Long teacherId;
 
-    private List<TeacherSubjectDTO> subjects;
+    private Long subjectId;
+
+    private String subjectName;
+
+    private String subjectCode;
 
 }

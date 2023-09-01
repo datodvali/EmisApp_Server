@@ -34,6 +34,7 @@ public class StudentSubject {
 
     private double markInSubject;
 
+    @Column(columnDefinition = "boolean default false")
     private boolean passed;
 
     @OneToMany(mappedBy = "studentSubject")

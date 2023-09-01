@@ -1,6 +1,5 @@
 package com.freeuniproject.emisapp.api;
 
-import com.freeuniproject.emisapp.domain.Book;
 import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;

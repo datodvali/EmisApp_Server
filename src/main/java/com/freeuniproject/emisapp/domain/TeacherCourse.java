@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class TeacherSubject {
+public class TeacherCourse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teachersubject_id_sequence_generator")

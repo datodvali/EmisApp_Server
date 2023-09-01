@@ -2,7 +2,6 @@ package com.freeuniproject.emisapp.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -28,9 +27,10 @@ public class Teacher {
     @Enumerated(EnumType.STRING)
     private TeacherStatus status;
 
+    @Column(columnDefinition = "double default 0.0")
     private double salary;
 
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
-    private Set<TeacherSubject> subjects;
+    private Set<TeacherCourse> subjects;
 
 }

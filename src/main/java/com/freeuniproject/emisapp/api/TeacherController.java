@@ -1,11 +1,9 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.TeacherStatus;
-import com.freeuniproject.emisapp.dto.TeacherDTO;
-import com.freeuniproject.emisapp.dto.TeacherSubjectCardDTO;
-import com.freeuniproject.emisapp.dto.TeacherSubjectDTO;
+import com.freeuniproject.emisapp.dto.*;
 import com.freeuniproject.emisapp.service.TeacherService;
-import com.freeuniproject.emisapp.service.TeacherSubjectService;
+import com.freeuniproject.emisapp.service.TeacherCourseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,11 +14,11 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-    private final TeacherSubjectService teacherSubjectService;
+    private final TeacherCourseService teacherCourseService;
 
-    public TeacherController(TeacherService teacherService, TeacherSubjectService teacherSubjectService) {
+    public TeacherController(TeacherService teacherService, TeacherCourseService teacherCourseService) {
         this.teacherService = teacherService;
-        this.teacherSubjectService = teacherSubjectService;
+        this.teacherCourseService = teacherCourseService;
     }
 
     @GetMapping
@@ -28,19 +26,24 @@ public class TeacherController {
         return teacherService.getTeacher(id);
     }
 
-    @GetMapping("/subjectCard")
-    public TeacherSubjectCardDTO getTeacherSubjectCard(@RequestParam Long id) {
-        return teacherSubjectService.getSubjectCard(id);
+    @GetMapping("/courses")
+    public List<CourseInfoDTO> getTeacherCourses(@RequestParam Long teacherId) {
+        return teacherCourseService.getTeacherCourses(teacherId);
     }
 
     @GetMapping("/teachingHistory")
-    public List<TeacherSubjectDTO> getTeachingHistory(@RequestParam Long id) {
-        return teacherSubjectService.getTeachingHistory(id);
+    public List<TeacherCourseDTO> getTeachingHistory(@RequestParam Long id) {
+        return teacherCourseService.getTeachingHistory(id);
     }
 
     @PutMapping("/update/status")
     public void updateStatus(@RequestParam Long id, @RequestParam TeacherStatus status) {
         teacherService.updateStatus(id, status);
+    }
+
+    @GetMapping("gradeStudent")
+    public void gradeStudent(@RequestParam Long studentGradeId, @RequestParam int points) {
+        teacherService.gradeStudent(studentGradeId, points);
     }
 
 }

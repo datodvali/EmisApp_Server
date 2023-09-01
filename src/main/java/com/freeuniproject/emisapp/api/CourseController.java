@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/emis/api/courseRegistation")
+@RequestMapping("/emis/api/course")
 public class CourseController {
 
     private final CourseService courseService;
@@ -22,13 +22,13 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping
-    public Page<CourseInfoDTO> getCourseInfos(@RequestParam Long studentId, @RequestParam String subjectName,
+    @GetMapping("/filter")
+    public Page<CourseInfoDTO> filterCourseInfos(@RequestParam Long studentId, @RequestParam String subjectName,
                                               @RequestParam int page, @RequestParam int size) {
         return courseService.getCourses(studentId, subjectName, PageRequest.of(page, size));
     }
 
-    @GetMapping
+    @GetMapping("/get/course")
     public CourseDTO getCourse(@RequestParam Long id) {
         return courseService.getCourse(id);
     }

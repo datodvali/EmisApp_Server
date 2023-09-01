@@ -15,4 +15,6 @@ public interface TeacherService {
 
     void updateStatus(Long id, TeacherStatus status);
 
+    void gradeStudent(Long studentGradeId, int points);
+
 }
