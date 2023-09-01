@@ -1,14 +1,15 @@
 package com.freeuniproject.emisapp.impl;
 
 import com.freeuniproject.emisapp.domain.Course;
-import com.freeuniproject.emisapp.domain.StudentSubject;
+import com.freeuniproject.emisapp.domain.StudentCourse;
 import com.freeuniproject.emisapp.domain.Subject;
 import com.freeuniproject.emisapp.dto.CourseDTO;
+import com.freeuniproject.emisapp.dto.CourseDetailsDTO;
 import com.freeuniproject.emisapp.dto.CourseInfoDTO;
 import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
 import com.freeuniproject.emisapp.mapper.CourseMapper;
 import com.freeuniproject.emisapp.repository.CourseRepository;
-import com.freeuniproject.emisapp.repository.StudentSubjectRepository;
+import com.freeuniproject.emisapp.repository.StudentCourseRepository;
 import com.freeuniproject.emisapp.service.CourseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,15 +27,15 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
 
-    private final StudentSubjectRepository studentSubjectRepository;
+    private final StudentCourseRepository studentCourseRepository;
 
     private final CourseMapper courseMapper;
 
     private final CourseInfoMapper courseInfoMapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, StudentSubjectRepository studentSubjectRepository, CourseMapper courseMapper, CourseInfoMapper courseInfoMapper) {
+    public CourseServiceImpl(CourseRepository courseRepository, StudentCourseRepository studentCourseRepository, CourseMapper courseMapper, CourseInfoMapper courseInfoMapper) {
         this.courseRepository = courseRepository;
-        this.studentSubjectRepository = studentSubjectRepository;
+        this.studentCourseRepository = studentCourseRepository;
         this.courseMapper = courseMapper;
         this.courseInfoMapper = courseInfoMapper;
     }
@@ -52,6 +53,12 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findById(id).map(courseMapper::toDTO).orElse(null);
     }
 
+    @Override
+    public List<CourseDetailsDTO> getCourseDetails(Long courseId) {
+//        return courseRepository.findBy()
+        return null;
+    }
+
     private CourseInfoDTO courseInfoForStudent(Long studentId, Course course) {
         CourseInfoDTO courseInfo = courseInfoMapper.toDTO(course);
         courseInfo.setAvailable(getAvailability(studentId, new HashSet<>(course.getSubject().getPrerequisites())));
@@ -59,8 +66,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private boolean getAvailability(Long studentId, Set<Subject> prerequisites) {
-        Set<StudentSubject> studentSubjects = new HashSet<>(studentSubjectRepository.findPassedSubjectsByStudent(studentId));
-        Set<Subject> subjects = studentSubjects.stream().map(studentSubject -> studentSubject.getCourse().getSubject()).collect(Collectors.toSet());
+        Set<StudentCourse> studentCourses = new HashSet<>(studentCourseRepository.findPassedCoursesByStudent(studentId));
+        Set<Subject> subjects = studentCourses.stream().map(studentCourse -> studentCourse.getCourse().getSubject()).collect(Collectors.toSet());
         return subjects.containsAll(prerequisites);
     }
 

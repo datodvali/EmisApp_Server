@@ -8,7 +8,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class StudentSubjectDTO {
+public class StudentCourseDTO {
 
     private Long id;
 

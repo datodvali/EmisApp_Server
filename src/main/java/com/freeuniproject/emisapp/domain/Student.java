@@ -38,6 +38,6 @@ public class Student {
     private StudentFinances finances;
 
     @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    private List<StudentSubject> subjects;
+    private List<StudentCourse> subjects;
 
 }

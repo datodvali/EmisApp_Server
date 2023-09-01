@@ -1,16 +1,13 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.StudentStatus;
+import com.freeuniproject.emisapp.dto.StudentCourseDTO;
 import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
-import com.freeuniproject.emisapp.dto.StudentSubjectCardDTO;
-import com.freeuniproject.emisapp.dto.StudentSubjectDTO;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentService;
-import com.freeuniproject.emisapp.service.StudentSubjectService;
-import org.springframework.http.ResponseEntity;
+import com.freeuniproject.emisapp.service.StudentCourseService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,12 +19,12 @@ public class StudentController {
 
     private final StudentFinancesService studentFinancesService;
 
-    private final StudentSubjectService studentSubjectService;
+    private final StudentCourseService studentCourseService;
 
-    public StudentController(StudentService studentService, StudentFinancesService studentFinancesService, StudentSubjectService studentSubjectService) {
+    public StudentController(StudentService studentService, StudentFinancesService studentFinancesService, StudentCourseService studentCourseService) {
         this.studentService = studentService;
         this.studentFinancesService = studentFinancesService;
-        this.studentSubjectService = studentSubjectService;
+        this.studentCourseService = studentCourseService;
     }
 
     @GetMapping
@@ -41,18 +38,18 @@ public class StudentController {
     }
 
     @GetMapping("/finances")
-    public StudentFinancesDTO getStudentFinances(@RequestParam Long id) {
-        return studentFinancesService.getStudentFinancesByStudentId(id);
+    public StudentFinancesDTO getStudentFinances(@RequestParam Long studentId) {
+        return studentFinancesService.getStudentFinancesByStudentId(studentId);
     }
 
     @GetMapping("/subjectCard")
-    public StudentSubjectCardDTO getStudentSubjectCard(@RequestParam Long id) {
-        return studentSubjectService.getSubjectCard(id);
+    public List<List<StudentCourseDTO>> getStudentCourses(@RequestParam Long studentId) {
+        return studentCourseService.getStudentCourses(studentId);
     }
 
     @GetMapping("/class")
-    public List<StudentSubjectDTO> getStudentsInfoForClass(@RequestParam Long classId) {
-        return studentSubjectService.getStudentsInfoForClass(classId);
+    public List<StudentCourseDTO> getStudentsInfoForCourse(@RequestParam Long classId) {
+        return studentCourseService.getStudentsInfoForCourse(classId);
     }
 
     @PutMapping("update/student/points")

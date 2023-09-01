@@ -2,6 +2,7 @@ package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.TeacherStatus;
 import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.service.CourseService;
 import com.freeuniproject.emisapp.service.TeacherService;
 import com.freeuniproject.emisapp.service.TeacherCourseService;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,12 @@ public class TeacherController {
 
     private final TeacherCourseService teacherCourseService;
 
-    public TeacherController(TeacherService teacherService, TeacherCourseService teacherCourseService) {
+    private final CourseService courseService;
+
+    public TeacherController(TeacherService teacherService, TeacherCourseService teacherCourseService, CourseService courseService) {
         this.teacherService = teacherService;
         this.teacherCourseService = teacherCourseService;
+        this.courseService = courseService;
     }
 
     @GetMapping
@@ -29,6 +33,11 @@ public class TeacherController {
     @GetMapping("/courses")
     public List<CourseInfoDTO> getTeacherCourses(@RequestParam Long teacherId) {
         return teacherCourseService.getTeacherCourses(teacherId);
+    }
+
+    @GetMapping("/course")
+    public List<CourseDetailsDTO> getCourseDetails(@RequestParam Long courseId) {
+        return courseService.getCourseDetails(courseId);
     }
 
     @GetMapping("/teachingHistory")

@@ -12,10 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class StudentSubjectCardDTO {
+public class StudentCourseCardDTO {
 
-    private long studentId;
-
-    private List<List<StudentSubjectDTO>> subjectsBySemester;
+    private List<List<StudentCourseDTO>> coursesBySemester;
 
 }

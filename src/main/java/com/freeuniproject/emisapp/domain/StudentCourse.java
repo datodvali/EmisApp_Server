@@ -12,11 +12,11 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class StudentSubject {
+public class StudentCourse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studentsubject_id_sequence_generator")
-    @SequenceGenerator(name = "studentsubject_id_sequence_generator", sequenceName = "STUDENTSUBJECT_ID_SEQUENCE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studentcourse_id_sequence_generator")
+    @SequenceGenerator(name = "studentcourse_id_sequence_generator", sequenceName = "STUDENTCOURSE_ID_SEQUENCE", allocationSize = 1)
     private Long id;
 
     @ManyToOne
@@ -37,7 +37,7 @@ public class StudentSubject {
     @Column(columnDefinition = "boolean default false")
     private boolean passed;
 
-    @OneToMany(mappedBy = "studentSubject")
+    @OneToMany(mappedBy = "studentCourse")
     private List<StudentGrade> gradeComponents;
 
 }
