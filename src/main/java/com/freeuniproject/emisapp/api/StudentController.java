@@ -4,7 +4,9 @@ import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.StudentCourseDTO;
 import com.freeuniproject.emisapp.dto.StudentDTO;
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
+import com.freeuniproject.emisapp.dto.StudentGradeDTO;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
+import com.freeuniproject.emisapp.service.StudentGradeService;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.StudentCourseService;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +23,13 @@ public class StudentController {
 
     private final StudentCourseService studentCourseService;
 
-    public StudentController(StudentService studentService, StudentFinancesService studentFinancesService, StudentCourseService studentCourseService) {
+    private final StudentGradeService studentGradeService;
+
+    public StudentController(StudentService studentService, StudentFinancesService studentFinancesService, StudentCourseService studentCourseService, StudentGradeService studentGradeService) {
         this.studentService = studentService;
         this.studentFinancesService = studentFinancesService;
         this.studentCourseService = studentCourseService;
+        this.studentGradeService = studentGradeService;
     }
 
     @GetMapping
@@ -42,9 +47,14 @@ public class StudentController {
         return studentFinancesService.getStudentFinancesByStudentId(studentId);
     }
 
-    @GetMapping("/subjectCard")
+    @GetMapping("/courses")
     public List<List<StudentCourseDTO>> getStudentCourses(@RequestParam Long studentId) {
         return studentCourseService.getStudentCourses(studentId);
+    }
+
+    @GetMapping("/studentGradeComponents")
+    public List<StudentGradeDTO> getStudentGradeInfo(@RequestParam Long studentCourseId) {
+        return studentCourseService.getStudentGradeInfo(studentCourseId);
     }
 
     @GetMapping("/class")
@@ -54,7 +64,7 @@ public class StudentController {
 
     @PutMapping("update/student/points")
     public void updateStudentPoints(@RequestParam Long studentGradeId, @RequestParam Double points) {
-
+        studentGradeService.updateStudentPoints(studentGradeId, points);
     }
 
 }

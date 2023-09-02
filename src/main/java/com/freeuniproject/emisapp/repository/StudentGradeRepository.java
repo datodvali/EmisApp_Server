@@ -1,20 +1,16 @@
 package com.freeuniproject.emisapp.repository;
 
-import com.freeuniproject.emisapp.domain.Student;
-import com.freeuniproject.emisapp.domain.StudentStatus;
+import com.freeuniproject.emisapp.domain.StudentGrade;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface StudentGradeRepository extends JpaRepository<StudentGrade, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Student s SET s.status = :status WHERE s.id = :id")
-    void updateStatus(@Param("id") Long id, @Param("status") StudentStatus status);
-
-
-
+    @Query("UPDATE StudentGrade s SET s.mark = :points WHERE s.id = :studentGradeId")
+    void setStudentGrade(@Param("studentGradeId")long studentGradeId, double points);
 }

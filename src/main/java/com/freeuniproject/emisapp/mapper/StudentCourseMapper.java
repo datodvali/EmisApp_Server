@@ -4,19 +4,28 @@ import com.freeuniproject.emisapp.domain.StudentCourse;
 import com.freeuniproject.emisapp.dto.StudentCourseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StudentCourseMapper {
 
-    @Mapping(source = "studentCourse.student.id", target = "studentId")
-    @Mapping(source = "teachers", target = "subject.teachers")
-    @Mapping(source = "studentCourse.course.subject.id", target = "subject.id")
-    @Mapping(source = "studentCourse.course.subject.name", target = "subject.name")
-    @Mapping(source = "studentCourse.course.subject.description", target = "subject.description")
-    StudentCourseDTO toDTO(StudentCourse studentCourse, List<String> teachers);
+    @Mappings({
+            @Mapping(source = "student.id", target = "studentId"),
+            @Mapping(source = "course.id", target = "courseId"),
+            @Mapping(source = "course.subject.name", target = "courseName"),
+            @Mapping(source = "course.subject.code", target = "subjectCode"),
+            @Mapping(source = "markInSubject", target = "mark"),
+            @Mapping(source = "course.subject.description", target = "description")
+    })
+    StudentCourseDTO toDTO(StudentCourse studentCourse);
 
-    StudentCourse fromDTO(StudentCourseDTO dto);
+    default List<StudentCourseDTO> toDTOs(List<StudentCourse> studentCourses) {
+        List<StudentCourseDTO> dtos = new ArrayList<>();
+        studentCourses.forEach(course -> dtos.add(this.toDTO(course)));
+        return dtos;
+    }
 
 }

@@ -47,9 +47,4 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.updateStatus(id, status);
     }
 
-    @Override
-    public void gradeStudent(Long studentGradeId, int points) {
-
-    }
-
 }

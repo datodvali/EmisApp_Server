@@ -14,12 +14,16 @@ public class StudentCourseDTO {
 
     private long studentId;
 
-    private SubjectDTO subject;
+    private long courseId;
 
-    private int semester;
+    private String courseName;
+
+    private String subjectCode;
+
+    private double mark;
 
     private Grade grade;
 
-    private double markInSubject;
+    private String description;
 
 }

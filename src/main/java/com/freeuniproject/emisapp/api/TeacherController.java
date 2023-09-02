@@ -50,9 +50,4 @@ public class TeacherController {
         teacherService.updateStatus(id, status);
     }
 
-    @GetMapping("gradeStudent")
-    public void gradeStudent(@RequestParam Long studentGradeId, @RequestParam int points) {
-        teacherService.gradeStudent(studentGradeId, points);
-    }
-
 }

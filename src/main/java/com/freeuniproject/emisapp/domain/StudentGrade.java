@@ -1,7 +1,11 @@
 package com.freeuniproject.emisapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 public class StudentGrade {
 
@@ -13,6 +17,7 @@ public class StudentGrade {
     @ManyToOne
     @JoinColumn(name = "gradeComponent_id")
     private GradeComponent gradeComponent;
+
 
     @ManyToOne
     @JoinColumn(name = "studentCourse_id")
