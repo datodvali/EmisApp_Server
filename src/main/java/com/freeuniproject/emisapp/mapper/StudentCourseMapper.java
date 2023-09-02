@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -23,6 +24,9 @@ public interface StudentCourseMapper {
     StudentCourseDTO toDTO(StudentCourse studentCourse);
 
     default List<StudentCourseDTO> toDTOs(List<StudentCourse> studentCourses) {
+        if (studentCourses == null) {
+            return Collections.emptyList();
+        }
         List<StudentCourseDTO> dtos = new ArrayList<>();
         studentCourses.forEach(course -> dtos.add(this.toDTO(course)));
         return dtos;

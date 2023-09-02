@@ -11,6 +11,6 @@ public interface StudentCourseService {
 
     List<StudentCourseDTO> getStudentsInfoForCourse(Long classId);
 
-    List<StudentGradeDTO> getStudentGradeInfo(Long studentCourseId);
+    List<StudentGradeDTO> getStudentGradeInfo(Long studentId, Long courseId);
 
 }

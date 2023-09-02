@@ -44,8 +44,8 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     }
 
     @Override
-    public List<StudentGradeDTO> getStudentGradeInfo(Long studentCourseId) {
-        Optional<StudentCourse> optionalStudentCourse = studentCourseRepository.findById(studentCourseId);
+    public List<StudentGradeDTO> getStudentGradeInfo(Long studentId, Long courseId) {
+        Optional<StudentCourse> optionalStudentCourse = studentCourseRepository.findByStudentAndCourse(studentId, courseId);
         if (optionalStudentCourse.isEmpty()) {
             return null;
         }

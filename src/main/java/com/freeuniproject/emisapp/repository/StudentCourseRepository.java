@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourse, Long> {
 
@@ -17,4 +18,8 @@ public interface StudentCourseRepository extends JpaRepository<StudentCourse, Lo
 
     @Query("SELECT s FROM StudentCourse s WHERE s.student.id = :studentId AND s.passed = TRUE")
     List<StudentCourse> findPassedCoursesByStudent(@Param("studentId") Long studentId);
+
+    @Query("SELECT s FROM StudentCourse s WHERE s.student.id = :studentId AND s.course.id = :courseId")
+    Optional<StudentCourse> findByStudentAndCourse(@Param("studentId") Long studentId, @Param("courseId") Long courseId);
+
 }

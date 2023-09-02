@@ -5,7 +5,11 @@ public class CourseDTO {
 
     private Long id;
 
-    private SubjectDTO subject;
+    private String courseName;
+
+    private String subjectCode;
+
+    private String subjectDescription;
 
     private int year;
 
@@ -14,6 +18,8 @@ public class CourseDTO {
     private int studentsRegistered;
 
     private int studentLimit;
+
+    private int credits;
 
     private boolean finished;
 

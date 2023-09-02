@@ -35,11 +35,6 @@ public class TeacherController {
         return teacherCourseService.getTeacherCourses(teacherId);
     }
 
-    @GetMapping("/course")
-    public List<CourseDetailsDTO> getCourseDetails(@RequestParam Long courseId) {
-        return courseService.getCourseDetails(courseId);
-    }
-
     @GetMapping("/teachingHistory")
     public List<TeacherCourseDTO> getTeachingHistory(@RequestParam Long id) {
         return teacherCourseService.getTeachingHistory(id);

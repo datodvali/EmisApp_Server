@@ -21,6 +21,4 @@ public class SubjectDTO {
 
     private String description;
 
-    private List<String> teachers;
-
 }

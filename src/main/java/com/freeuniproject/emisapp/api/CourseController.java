@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.dto.CourseDTO;
+import com.freeuniproject.emisapp.dto.CourseDetailsDTO;
 import com.freeuniproject.emisapp.dto.CourseInfoDTO;
 import com.freeuniproject.emisapp.service.CourseService;
 import org.springframework.data.domain.Page;
@@ -32,5 +33,11 @@ public class CourseController {
     public CourseDTO getCourse(@RequestParam Long id) {
         return courseService.getCourse(id);
     }
+
+    @GetMapping("/details")
+    public List<CourseDetailsDTO> getCourseDetails(@RequestParam Long courseId) {
+        return courseService.getCourseDetails(courseId);
+    }
+
 
 }

@@ -52,9 +52,9 @@ public class StudentController {
         return studentCourseService.getStudentCourses(studentId);
     }
 
-    @GetMapping("/studentGradeComponents")
-    public List<StudentGradeDTO> getStudentGradeInfo(@RequestParam Long studentCourseId) {
-        return studentCourseService.getStudentGradeInfo(studentCourseId);
+    @GetMapping("/course/grades")
+    public List<StudentGradeDTO> getStudentGradeInfo(@RequestParam Long studentId, @RequestParam Long courseId) {
+        return studentCourseService.getStudentGradeInfo(studentId, courseId);
     }
 
     @GetMapping("/class")
