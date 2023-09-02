@@ -1,9 +1,7 @@
 package com.freeuniproject.emisapp.service;
 
-import com.freeuniproject.emisapp.dto.CourseDTO;
-import com.freeuniproject.emisapp.dto.CourseDetailsForStudentDTO;
-import com.freeuniproject.emisapp.dto.CourseDetailsForTeacherDTO;
-import com.freeuniproject.emisapp.dto.CourseInfoDTO;
+import com.freeuniproject.emisapp.domain.Syllabus;
+import com.freeuniproject.emisapp.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +9,9 @@ public interface CourseService {
 
     Page<CourseInfoDTO> getCourses(Long studentId, String subjectName, Pageable pageable);
 
-    CourseDTO getCourse(Long id);
+    CourseDTO getCourse(Long courseId);
+
+    SyllabusDTO getSyllabus(Long courseId);
 
     CourseDetailsForTeacherDTO getCourseDetailsForTeacher(Long courseId);
 

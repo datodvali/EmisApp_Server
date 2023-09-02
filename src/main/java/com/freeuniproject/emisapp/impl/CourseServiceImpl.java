@@ -3,14 +3,12 @@ package com.freeuniproject.emisapp.impl;
 import com.freeuniproject.emisapp.domain.Course;
 import com.freeuniproject.emisapp.domain.StudentCourse;
 import com.freeuniproject.emisapp.domain.Subject;
+import com.freeuniproject.emisapp.domain.Syllabus;
 import com.freeuniproject.emisapp.dto.*;
-import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
-import com.freeuniproject.emisapp.mapper.CourseMapper;
-import com.freeuniproject.emisapp.mapper.StudentGradeMapper;
-import com.freeuniproject.emisapp.mapper.StudentInfoMapper;
+import com.freeuniproject.emisapp.mapper.*;
 import com.freeuniproject.emisapp.repository.CourseRepository;
 import com.freeuniproject.emisapp.repository.StudentCourseRepository;
-import com.freeuniproject.emisapp.repository.StudentGradeRepository;
+import com.freeuniproject.emisapp.repository.SyllabusRepository;
 import com.freeuniproject.emisapp.service.CourseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,24 +26,33 @@ public class CourseServiceImpl implements CourseService {
 
     private final StudentCourseRepository studentCourseRepository;
 
+    private final SyllabusRepository syllabusRepository;
+
     private final CourseMapper courseMapper;
 
     private final CourseInfoMapper courseInfoMapper;
 
     private final StudentInfoMapper studentInfoMapper;
 
-    private final StudentGradeRepository studentGradeRepository;
-
     private final StudentGradeMapper studentGradeMapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, StudentCourseRepository studentCourseRepository, CourseMapper courseMapper, CourseInfoMapper courseInfoMapper, StudentInfoMapper studentInfoMapper, StudentGradeRepository studentGradeRepository, StudentGradeMapper studentGradeMapper) {
+    private final SyllabusMapper syllabusMapper;
+
+    public CourseServiceImpl(CourseRepository courseRepository,
+                             StudentCourseRepository studentCourseRepository,
+                             SyllabusRepository syllabusRepository, CourseMapper courseMapper,
+                             CourseInfoMapper courseInfoMapper,
+                             StudentInfoMapper studentInfoMapper,
+                             StudentGradeMapper studentGradeMapper,
+                             SyllabusMapper syllabusMapper) {
         this.courseRepository = courseRepository;
         this.studentCourseRepository = studentCourseRepository;
+        this.syllabusRepository = syllabusRepository;
         this.courseMapper = courseMapper;
         this.courseInfoMapper = courseInfoMapper;
         this.studentInfoMapper = studentInfoMapper;
-        this.studentGradeRepository = studentGradeRepository;
         this.studentGradeMapper = studentGradeMapper;
+        this.syllabusMapper = syllabusMapper;
     }
 
     @Override
@@ -57,8 +64,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseDTO getCourse(Long id) {
-        return courseRepository.findById(id).map(courseMapper::toDTO).orElse(null);
+    public CourseDTO getCourse(Long courseId) {
+        return courseRepository.findById(courseId).map(courseMapper::toDTO).orElse(null);
+    }
+
+    @Override
+    public SyllabusDTO getSyllabus(Long courseId) {
+        Optional<Syllabus> syllabusOptional =  syllabusRepository.findByCourse_Id(courseId);
+        return syllabusOptional.map(syllabusMapper::toDTO).orElse(null);
     }
 
     @Override
