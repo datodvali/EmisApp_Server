@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -25,6 +24,7 @@ public class Book {
     private String description;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] content;
 
     @ElementCollection
@@ -34,7 +34,5 @@ public class Book {
     private List<Genre> genres;
 
     private int publishDate;
-
-    private String url;
 
 }
