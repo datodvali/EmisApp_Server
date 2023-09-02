@@ -11,6 +11,6 @@ public interface StudentGradeRepository extends JpaRepository<StudentGrade, Long
 
     @Transactional
     @Modifying
-    @Query("UPDATE StudentGrade s SET s.mark = :points WHERE s.id = :studentGradeId")
-    void setStudentGrade(@Param("studentGradeId")long studentGradeId, double points);
+    @Query("UPDATE StudentGrade s SET s.mark = :mark WHERE s.id = :studentGradeId")
+    void setStudentGrade(@Param("studentGradeId") long studentGradeId,@Param("mark") double mark);
 }

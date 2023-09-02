@@ -14,8 +14,8 @@ public class StudentGradeServiceImpl implements StudentGradeService {
     }
 
     @Override
-    public void updateStudentPoints(long studentGradeId, double points) {
-        studentGradeRepository.setStudentGrade(studentGradeId, points);
+    public void updateStudentMark(long studentGradeId, double mark) {
+        studentGradeRepository.setStudentGrade(studentGradeId, mark);
     }
 
 }

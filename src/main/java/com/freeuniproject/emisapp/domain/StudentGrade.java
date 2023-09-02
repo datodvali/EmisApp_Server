@@ -18,7 +18,6 @@ public class StudentGrade {
     @JoinColumn(name = "gradeComponent_id")
     private GradeComponent gradeComponent;
 
-
     @ManyToOne
     @JoinColumn(name = "studentCourse_id")
     private StudentCourse studentCourse;

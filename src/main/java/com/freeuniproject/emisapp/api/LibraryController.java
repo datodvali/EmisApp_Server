@@ -18,8 +18,6 @@ import java.io.IOException;
 @RequestMapping("/emis/api/library")
 public class LibraryController {
 
-    private final String LIBRARY_PATH = "";
-
     private final BookService bookService;
 
     public LibraryController(BookService bookService) {
@@ -32,11 +30,10 @@ public class LibraryController {
         return bookService.findBooks(title, author, PageRequest.of(page, size));
     }
 
-    @PostMapping("/upload")
-    public void uploadBook(@RequestBody BookUploadRequestBodyDTO book) throws IOException {
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadBook(@ModelAttribute BookUploadRequestBodyDTO book) throws IOException {
         bookService.addToLibrary(book);
     }
-
 
     @GetMapping("/download")
     public ResponseEntity<byte[]> downloadBook(@RequestParam Long id) {

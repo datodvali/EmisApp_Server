@@ -1,10 +1,7 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.StudentStatus;
-import com.freeuniproject.emisapp.dto.StudentCourseDTO;
-import com.freeuniproject.emisapp.dto.StudentDTO;
-import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
-import com.freeuniproject.emisapp.dto.StudentGradeDTO;
+import com.freeuniproject.emisapp.dto.*;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentGradeService;
 import com.freeuniproject.emisapp.service.StudentService;
@@ -57,14 +54,9 @@ public class StudentController {
         return studentCourseService.getStudentGradeInfo(studentId, courseId);
     }
 
-    @GetMapping("/class")
-    public List<StudentCourseDTO> getStudentsInfoForCourse(@RequestParam Long classId) {
-        return studentCourseService.getStudentsInfoForCourse(classId);
-    }
-
-    @PutMapping("update/student/points")
-    public void updateStudentPoints(@RequestParam Long studentGradeId, @RequestParam Double points) {
-        studentGradeService.updateStudentPoints(studentGradeId, points);
+    @PutMapping("update/mark")
+    public void updateStudentMark(@RequestParam Long studentGradeId, @RequestParam Double mark) {
+        studentGradeService.updateStudentMark(studentGradeId, mark);
     }
 
 }

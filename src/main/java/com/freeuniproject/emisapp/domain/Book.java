@@ -1,5 +1,6 @@
 package com.freeuniproject.emisapp.domain;
 
+import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -33,5 +35,13 @@ public class Book {
     private List<Genre> genres;
 
     private int publishDate;
+
+    public Book(BookUploadRequestBodyDTO uploadRequest) {
+        this.title = uploadRequest.getTitle();
+        this.author = uploadRequest.getAuthor();
+        this.description = uploadRequest.getDescription();
+        this.publishDate = uploadRequest.getPublicationYear();
+        this.genres = uploadRequest.getGenres();
+    }
 
 }

@@ -12,12 +12,12 @@ import java.io.IOException;
 @Mapper(componentModel = "spring")
 public interface BookUploadRequestMapper {
 
-    @Mapping(source = "content", target = "content", qualifiedByName = "contentMapper")
-    Book fromDTO(BookUploadRequestBodyDTO dto);
-
-    @Named("contentMapper")
-    default byte[] toByteArray(MultipartFile content) throws IOException {
-        return content.getBytes();
-    }
+//    @Mapping(source = "content", target = "content", qualifiedByName = "contentMapper")
+//    Book fromDTO(BookUploadRequestBodyDTO dto);
+//
+//    @Named("contentMapper")
+//    default byte[] toByteArray(MultipartFile content) throws IOException {
+//        return content.getBytes();
+//    }
 
 }

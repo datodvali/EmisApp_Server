@@ -1,5 +1,7 @@
 package com.freeuniproject.emisapp.impl;
 
+import com.freeuniproject.emisapp.domain.Book;
+import com.freeuniproject.emisapp.domain.BookContent;
 import com.freeuniproject.emisapp.dto.BookDTO;
 import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import com.freeuniproject.emisapp.dto.BookUploadRequestBodyDTO;
@@ -12,6 +14,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -43,8 +47,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addToLibrary(BookUploadRequestBodyDTO book) {
-        bookRepository.save(bookUploadRequestMapper.fromDTO(book));
+    public void addToLibrary(BookUploadRequestBodyDTO uploadRequest) throws IOException {
+        Book book = new Book(uploadRequest);
+        BookContent bookContent = new BookContent();
+        bookContent.setContent(uploadRequest.getContent().getBytes());
+        bookContent.setBook(book);
+        book.setContent(bookContent);
+        bookRepository.save(book);
     }
 
 }
