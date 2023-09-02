@@ -23,9 +23,8 @@ public class Book {
 
     private String description;
 
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] content;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.ALL})
+    private BookContent content;
 
     @ElementCollection
     @CollectionTable(name = "genres_to_books", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))

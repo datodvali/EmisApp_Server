@@ -8,6 +8,7 @@ import com.freeuniproject.emisapp.mapper.BookMapper;
 import com.freeuniproject.emisapp.mapper.BookUploadRequestMapper;
 import com.freeuniproject.emisapp.repository.BookRepository;
 import com.freeuniproject.emisapp.service.BookService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class BookServiceImpl implements BookService {
         this.bookUploadRequestMapper = bookUploadRequestMapper;
     }
 
+    @Transactional
     @Override
     public Page<BookInfoDTO> findBooks(String title, String author, Pageable pageable) {
         return bookRepository.findBooksByTitleAndAuthor(title, author, pageable).map(bookInfoMapper::toDTO);
