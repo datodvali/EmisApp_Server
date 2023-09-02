@@ -17,7 +17,7 @@ public class CourseDTO {
 
     private int studentsRegistered;
 
-    private int studentLimit;
+    private int studentsLimit;
 
     private int credits;
 

@@ -6,8 +6,10 @@ import com.freeuniproject.emisapp.domain.Subject;
 import com.freeuniproject.emisapp.dto.CourseDTO;
 import com.freeuniproject.emisapp.dto.CourseDetailsDTO;
 import com.freeuniproject.emisapp.dto.CourseInfoDTO;
+import com.freeuniproject.emisapp.dto.StudentInfoDTO;
 import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
 import com.freeuniproject.emisapp.mapper.CourseMapper;
+import com.freeuniproject.emisapp.mapper.StudentInfoMapper;
 import com.freeuniproject.emisapp.repository.CourseRepository;
 import com.freeuniproject.emisapp.repository.StudentCourseRepository;
 import com.freeuniproject.emisapp.service.CourseService;
@@ -17,9 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,11 +33,14 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseInfoMapper courseInfoMapper;
 
-    public CourseServiceImpl(CourseRepository courseRepository, StudentCourseRepository studentCourseRepository, CourseMapper courseMapper, CourseInfoMapper courseInfoMapper) {
+    private final StudentInfoMapper studentInfoMapper;
+
+    public CourseServiceImpl(CourseRepository courseRepository, StudentCourseRepository studentCourseRepository, CourseMapper courseMapper, CourseInfoMapper courseInfoMapper, StudentInfoMapper studentInfoMapper) {
         this.courseRepository = courseRepository;
         this.studentCourseRepository = studentCourseRepository;
         this.courseMapper = courseMapper;
         this.courseInfoMapper = courseInfoMapper;
+        this.studentInfoMapper = studentInfoMapper;
     }
 
     @Override
@@ -54,9 +57,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDetailsDTO> getCourseDetails(Long courseId) {
-//        return courseRepository.findBy()
-        return null;
+    public CourseDetailsDTO getCourseDetails(Long courseId) {
+        Optional<Course> course = courseRepository.findById(courseId);
+        List<StudentCourse> studentCourses = studentCourseRepository.findByCourseId(courseId);
+        List<StudentInfoDTO> studentInfos = new ArrayList<>();
+        if (studentCourses != null && !studentCourses.isEmpty()) {
+            studentCourses.forEach(studentCourse -> studentInfoMapper.toDTO(studentCourse.getStudent()));
+        }
+        return new CourseDetailsDTO(
+                course.map(courseMapper::toDTO).orElse(null),
+                studentInfos
+        );
     }
 
     private CourseInfoDTO courseInfoForStudent(Long studentId, Course course) {

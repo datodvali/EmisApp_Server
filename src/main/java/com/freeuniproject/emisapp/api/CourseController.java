@@ -35,9 +35,8 @@ public class CourseController {
     }
 
     @GetMapping("/details")
-    public List<CourseDetailsDTO> getCourseDetails(@RequestParam Long courseId) {
+    public CourseDetailsDTO getCourseDetails(@RequestParam Long courseId) {
         return courseService.getCourseDetails(courseId);
     }
-
 
 }

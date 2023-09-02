@@ -14,5 +14,6 @@ public interface CourseService {
 
     CourseDTO getCourse(Long id);
 
-    List<CourseDetailsDTO> getCourseDetails(Long courseId);
+    CourseDetailsDTO getCourseDetails(Long courseId);
+
 }
