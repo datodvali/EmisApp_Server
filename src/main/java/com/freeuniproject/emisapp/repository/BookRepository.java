@@ -1,8 +1,6 @@
 package com.freeuniproject.emisapp.repository;
 
 import com.freeuniproject.emisapp.domain.Book;
-import com.freeuniproject.emisapp.domain.BookInfoProjection;
-import com.freeuniproject.emisapp.dto.BookInfoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
