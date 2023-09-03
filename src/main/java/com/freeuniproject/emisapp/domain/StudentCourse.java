@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.util.List;
 
 
-@NoArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -37,7 +36,7 @@ public class StudentCourse {
     @Column(columnDefinition = "boolean default false")
     private boolean passed;
 
-    @OneToMany(mappedBy = "studentCourse")
+    @OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL)
     private List<StudentGrade> gradeComponents;
 
 }

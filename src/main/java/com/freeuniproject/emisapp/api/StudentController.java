@@ -59,10 +59,9 @@ public class StudentController {
         studentGradeService.updateStudentMark(studentGradeId, mark);
     }
 
-    @PutMapping("/registeredCourses")
+    @GetMapping("/registeredCourses")
     public List<CourseInfoForStudentDTO> getRegisteredCourses(@RequestParam Long studentId) {
-//        studentCourseService.getStudentCourses();
-        return null;
+        return studentCourseService.getRegisteredCoursesForStudent(studentId);
     }
 
     @PostMapping("/registerCourse")

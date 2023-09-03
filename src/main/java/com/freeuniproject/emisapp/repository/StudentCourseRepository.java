@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.repository;
 
 import com.freeuniproject.emisapp.domain.StudentCourse;
+import com.freeuniproject.emisapp.dto.CourseInfoForStudentDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,6 @@ public interface StudentCourseRepository extends JpaRepository<StudentCourse, Lo
     @Query("SELECT s FROM StudentCourse s WHERE s.student.id = :studentId AND s.course.id = :courseId")
     Optional<StudentCourse> findByStudentAndCourse(@Param("studentId") Long studentId, @Param("courseId") Long courseId);
 
+    @Query("SELECT s from StudentCourse s WHERE s.student.id = :studentId AND s.semester = :semester")
+    List<StudentCourse> findByStudentAndSemester(@Param("studentId") Long studentId, @Param("semester") int semester);
 }

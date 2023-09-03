@@ -30,7 +30,7 @@ public class Student {
 
     private int credits;
 
-    private int creditsPasses;
+    private int creditsPassed;
 
     private double gpa;
 
