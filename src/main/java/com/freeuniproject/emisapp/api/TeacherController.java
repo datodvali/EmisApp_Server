@@ -26,8 +26,8 @@ public class TeacherController {
     }
 
     @GetMapping
-    public TeacherDTO getTeacher(@RequestParam Long id) {
-        return teacherService.getTeacher(id);
+    public TeacherDTO getTeacher(@RequestParam Long teacherId) {
+        return teacherService.getTeacher(teacherId);
     }
 
     @GetMapping("/courses")
@@ -36,13 +36,13 @@ public class TeacherController {
     }
 
     @GetMapping("/teachingHistory")
-    public List<TeacherCourseDTO> getTeachingHistory(@RequestParam Long id) {
-        return teacherCourseService.getTeachingHistory(id);
+    public List<TeacherCourseDTO> getTeachingHistory(@RequestParam Long teacherId) {
+        return teacherCourseService.getTeachingHistory(teacherId);
     }
 
     @PutMapping("/update/status")
-    public void updateStatus(@RequestParam Long id, @RequestParam TeacherStatus status) {
-        teacherService.updateStatus(id, status);
+    public void updateStatus(@RequestParam Long teacherId, @RequestParam TeacherStatus status) {
+        teacherService.updateStatus(teacherId, status);
     }
 
 }

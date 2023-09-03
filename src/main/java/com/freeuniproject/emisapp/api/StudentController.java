@@ -30,13 +30,13 @@ public class StudentController {
     }
 
     @GetMapping
-    public StudentDTO getStudent(@RequestParam Long id) {
-        return studentService.getStudent(id);
+    public StudentDTO getStudent(@RequestParam Long studentId) {
+        return studentService.getStudent(studentId);
     }
 
     @PutMapping("/update/status")
-    public void updateStatus(@RequestParam Long id, @RequestParam StudentStatus status) {
-        studentService.updateStatus(id, status);
+    public void updateStatus(@RequestParam Long studentId, @RequestParam StudentStatus status) {
+        studentService.updateStatus(studentId, status);
     }
 
     @GetMapping("/finances")
@@ -57,16 +57,6 @@ public class StudentController {
     @PutMapping("/update/mark")
     public void updateStudentMark(@RequestParam Long studentGradeId, @RequestParam Double mark) {
         studentGradeService.updateStudentMark(studentGradeId, mark);
-    }
-
-    @GetMapping("/registeredCourses")
-    public List<CourseInfoForStudentDTO> getRegisteredCourses(@RequestParam Long studentId) {
-        return studentCourseService.getRegisteredCoursesForStudent(studentId);
-    }
-
-    @PostMapping("/registerCourse")
-    public void registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
-        studentCourseService.registerStudentForCourse(studentId, courseId);
     }
 
 }

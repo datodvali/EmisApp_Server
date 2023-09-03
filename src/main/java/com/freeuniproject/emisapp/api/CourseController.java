@@ -23,12 +23,6 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/filter")
-    public Page<CourseInfoForStudentDTO> filterCourseInfos(@RequestParam Long studentId, @RequestParam String subjectName,
-                                              @RequestParam int page, @RequestParam int size) {
-        return courseService.filterCoursesForStudent(studentId, subjectName, PageRequest.of(page, size));
-    }
-
     @GetMapping("/get/course")
     public CourseDTO getCourse(@RequestParam Long id) {
         return courseService.getCourse(id);
