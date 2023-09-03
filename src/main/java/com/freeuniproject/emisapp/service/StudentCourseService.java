@@ -18,4 +18,5 @@ public interface StudentCourseService {
 
     List<CourseInfoForStudentDTO> getRegisteredCoursesForStudent(Long studentId);
 
+    void deleteStudentCourse(Long studentId, Long courseId);
 }

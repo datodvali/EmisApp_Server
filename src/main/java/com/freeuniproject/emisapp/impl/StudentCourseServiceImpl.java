@@ -116,6 +116,11 @@ public class StudentCourseServiceImpl implements StudentCourseService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteStudentCourse(Long studentId, Long courseId) {
+        studentCourseRepository.deleteByStudent_IdAndCourse_Id(studentId, courseId);
+    }
+
     private List<List<StudentCourseDTO>> getCoursesBySemester(List<StudentCourse> studentCourses) {
         List<List<StudentCourseDTO>> subjectsBySemester = new ArrayList<>();
 

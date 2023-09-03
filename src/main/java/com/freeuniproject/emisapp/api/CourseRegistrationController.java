@@ -38,4 +38,9 @@ public class CourseRegistrationController {
         studentCourseService.registerStudentForCourse(studentId, courseId);
     }
 
+    @DeleteMapping("/deleteRegisteredCourse")
+    public void deleteCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
+        studentCourseService.deleteStudentCourse(studentId, courseId);
+    }
+
 }
