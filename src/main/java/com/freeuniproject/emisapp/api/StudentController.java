@@ -54,9 +54,20 @@ public class StudentController {
         return studentCourseService.getStudentGradeInfo(studentId, courseId);
     }
 
-    @PutMapping("update/mark")
+    @PutMapping("/update/mark")
     public void updateStudentMark(@RequestParam Long studentGradeId, @RequestParam Double mark) {
         studentGradeService.updateStudentMark(studentGradeId, mark);
+    }
+
+    @PutMapping("/registeredCourses")
+    public List<CourseInfoForStudentDTO> getRegisteredCourses(@RequestParam Long studentId) {
+//        studentCourseService.getStudentCourses();
+        return null;
+    }
+
+    @PostMapping("/registerCourse")
+    public void registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
+        studentCourseService.registerStudentForCourse(studentId, courseId);
     }
 
 }

@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+import java.util.List;
+
 @Setter
 @Getter
 public class CourseInfoDTO {
@@ -15,6 +16,6 @@ public class CourseInfoDTO {
 
     private String subjectName;
 
-    private boolean available;
+    private List<String> prerequisites;
 
 }

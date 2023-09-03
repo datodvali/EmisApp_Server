@@ -1,11 +1,15 @@
 package com.freeuniproject.emisapp.impl;
 
+import com.freeuniproject.emisapp.domain.Course;
+import com.freeuniproject.emisapp.domain.Student;
 import com.freeuniproject.emisapp.domain.StudentCourse;
 import com.freeuniproject.emisapp.dto.StudentCourseDTO;
 import com.freeuniproject.emisapp.dto.StudentGradeDTO;
 import com.freeuniproject.emisapp.mapper.StudentCourseMapper;
 import com.freeuniproject.emisapp.mapper.StudentGradeMapper;
+import com.freeuniproject.emisapp.repository.CourseRepository;
 import com.freeuniproject.emisapp.repository.StudentCourseRepository;
+import com.freeuniproject.emisapp.repository.StudentRepository;
 import com.freeuniproject.emisapp.service.StudentCourseService;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +29,16 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 
     private final StudentGradeMapper studentGradeMapper;
 
-    public StudentCourseServiceImpl(StudentCourseRepository studentCourseRepository, StudentCourseMapper studentCourseMapper, StudentGradeMapper studentGradeMapper) {
+    private final StudentRepository studentRepository;
+
+    private final CourseRepository courseRepository;
+
+    public StudentCourseServiceImpl(StudentCourseRepository studentCourseRepository, StudentCourseMapper studentCourseMapper, StudentGradeMapper studentGradeMapper, StudentRepository studentRepository, CourseRepository courseRepository) {
         this.studentCourseRepository = studentCourseRepository;
         this.studentCourseMapper = studentCourseMapper;
         this.studentGradeMapper = studentGradeMapper;
+        this.studentRepository = studentRepository;
+        this.courseRepository = courseRepository;
     }
 
     @Override
@@ -51,6 +61,17 @@ public class StudentCourseServiceImpl implements StudentCourseService {
         }
         StudentCourse studentCourse = optionalStudentCourse.get();
         return studentCourse.getGradeComponents().stream().map(studentGradeMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void registerStudentForCourse(Long studentId, Long courseId) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        Optional<Course> courseOptional = courseRepository.findById(courseId);
+        if (studentOptional.isEmpty() || courseOptional.isEmpty()) {
+            return;
+        }
+        Student student = studentOptional.get();
+        Course course = courseOptional.get();
     }
 
     private List<List<StudentCourseDTO>> getCoursesBySemester(List<StudentCourse> studentCourses) {

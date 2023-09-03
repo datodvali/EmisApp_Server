@@ -13,4 +13,5 @@ public interface StudentCourseService {
 
     List<StudentGradeDTO> getStudentGradeInfo(Long studentId, Long courseId);
 
+    void registerStudentForCourse(Long studentId, Long courseId);
 }

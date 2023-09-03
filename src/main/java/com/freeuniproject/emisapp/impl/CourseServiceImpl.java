@@ -56,9 +56,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Page<CourseInfoDTO> getCourses(Long studentId, String subjectName, Pageable pageable) {
+    public Page<CourseInfoForStudentDTO> filterCoursesForStudent(Long studentId, String subjectName, Pageable pageable) {
         Page<Course> resultPage = courseRepository.filterCourses(subjectName, pageable);
-        List<CourseInfoDTO> courseInfos = resultPage.stream().map(course -> courseInfoForStudent(studentId, course))
+        List<CourseInfoForStudentDTO> courseInfos = resultPage.stream().map(course -> courseInfoForStudent(studentId, course))
                 .collect(Collectors.toList());
         return new PageImpl<>(courseInfos, PageRequest.of(pageable.getPageNumber(), courseInfos.size()), resultPage.getTotalElements());
     }
@@ -110,8 +110,8 @@ public class CourseServiceImpl implements CourseService {
         return studentGrades;
     }
 
-    private CourseInfoDTO courseInfoForStudent(Long studentId, Course course) {
-        CourseInfoDTO courseInfo = courseInfoMapper.toDTO(course);
+    private CourseInfoForStudentDTO courseInfoForStudent(Long studentId, Course course) {
+        CourseInfoForStudentDTO courseInfo = courseInfoMapper.toCourseInfoForStudentDTO(course);
         courseInfo.setAvailable(getAvailability(studentId, new HashSet<>(course.getSubject().getPrerequisites())));
         return courseInfo;
     }
