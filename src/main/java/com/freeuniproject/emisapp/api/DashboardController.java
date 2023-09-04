@@ -1,10 +1,12 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.DashboardComponent;
-import com.freeuniproject.emisapp.domain.UserType;
 import com.freeuniproject.emisapp.service.StudentService;
 import com.freeuniproject.emisapp.service.TeacherService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

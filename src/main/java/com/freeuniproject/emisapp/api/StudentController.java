@@ -34,7 +34,7 @@ public class StudentController {
         return studentService.getStudent(studentId);
     }
 
-    @PutMapping("/update/status")
+    @PutMapping("/status")
     public void updateStatus(@RequestParam Long studentId, @RequestParam StudentStatus status) {
         studentService.updateStatus(studentId, status);
     }

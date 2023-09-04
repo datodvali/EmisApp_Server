@@ -40,7 +40,7 @@ public class TeacherController {
         return teacherCourseService.getTeachingHistory(teacherId);
     }
 
-    @PutMapping("/update/status")
+    @PutMapping("/status")
     public void updateStatus(@RequestParam Long teacherId, @RequestParam TeacherStatus status) {
         teacherService.updateStatus(teacherId, status);
     }

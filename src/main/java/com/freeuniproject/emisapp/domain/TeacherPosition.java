@@ -7,7 +7,7 @@ public class TeacherPosition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacherposition_id_sequence_generator")
-    @SequenceGenerator(name = "t_id_sequence_generator", sequenceName = "SUBJECT_ID_SEQUENCE", allocationSize = 1)
+    @SequenceGenerator(name = "teacherposition_id_sequence_generator", sequenceName = "TEACHERPOSITION_ID_SEQUENCE", allocationSize = 1)
     private Long id;
 
     @Column(unique = true)

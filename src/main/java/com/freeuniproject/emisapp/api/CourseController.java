@@ -1,9 +1,10 @@
 package com.freeuniproject.emisapp.api;
 
-import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.dto.CourseDTO;
+import com.freeuniproject.emisapp.dto.CourseDetailsForStudentDTO;
+import com.freeuniproject.emisapp.dto.CourseDetailsForTeacherDTO;
+import com.freeuniproject.emisapp.dto.SyllabusDTO;
 import com.freeuniproject.emisapp.service.CourseService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +24,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping("/get/course")
+    @GetMapping
     public CourseDTO getCourse(@RequestParam Long id) {
         return courseService.getCourse(id);
     }
