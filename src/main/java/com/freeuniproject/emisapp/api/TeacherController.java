@@ -2,6 +2,7 @@ package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.TeacherStatus;
 import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.service.CourseService;
 import com.freeuniproject.emisapp.service.TeacherService;
 import com.freeuniproject.emisapp.service.TeacherCourseService;
@@ -26,7 +27,7 @@ public class TeacherController {
     }
 
     @GetMapping
-    public TeacherDTO getTeacher(@RequestParam Long teacherId) {
+    public TeacherDTO getTeacher(@RequestParam Long teacherId) throws EmisException {
         return teacherService.getTeacher(teacherId);
     }
 

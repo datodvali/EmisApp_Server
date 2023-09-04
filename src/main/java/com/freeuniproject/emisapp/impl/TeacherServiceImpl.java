@@ -3,6 +3,7 @@ package com.freeuniproject.emisapp.impl;
 import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.domain.TeacherStatus;
 import com.freeuniproject.emisapp.dto.TeacherDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.TeacherMapper;
 import com.freeuniproject.emisapp.repository.TeacherRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
@@ -27,8 +28,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDTO getTeacher(Long teacherId) {
-        return teacherRepository.findById(teacherId).map(teacherMapper::toDTO).orElse(null);
+    public TeacherDTO getTeacher(Long teacherId) throws EmisException {
+        return teacherRepository.findById(teacherId).map(teacherMapper::toDTO)
+                .orElseThrow(() -> new EmisException(String.format("Couldn't find a teacher with id %s", teacherId)));
     }
 
 
