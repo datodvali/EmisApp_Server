@@ -5,6 +5,7 @@ import com.freeuniproject.emisapp.domain.StudentCourse;
 import com.freeuniproject.emisapp.domain.Subject;
 import com.freeuniproject.emisapp.domain.Syllabus;
 import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.*;
 import com.freeuniproject.emisapp.repository.CourseRepository;
 import com.freeuniproject.emisapp.repository.StudentCourseRepository;
@@ -58,14 +59,12 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Page<CourseInfoForStudentDTO> filterCoursesForStudent(Long studentId, String subjectName, Pageable pageable) {
         Page<Course> resultPage = courseRepository.filterCourses(subjectName, pageable);
+        if (resultPage.isEmpty()) {
+            return Page.empty();
+        }
         List<CourseInfoForStudentDTO> courseInfos = resultPage.stream().map(course -> courseInfoForStudent(studentId, course))
                 .collect(Collectors.toList());
         return new PageImpl<>(courseInfos, PageRequest.of(pageable.getPageNumber(), courseInfos.size()), resultPage.getTotalElements());
-    }
-
-    @Override
-    public CourseDTO getCourse(Long courseId) {
-        return courseRepository.findById(courseId).map(courseMapper::toDTO).orElse(null);
     }
 
     @Override
@@ -75,38 +74,40 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseDetailsForTeacherDTO getCourseDetailsForTeacher(Long courseId) {
-        Optional<Course> course = courseRepository.findById(courseId);
+    public CourseDetailsForTeacherDTO getCourseDetailsForTeacher(Long courseId) throws EmisException {
+        Optional<Course> courseOptional = courseRepository.findById(courseId);
+        CourseDTO course = courseOptional.map(courseMapper::toDTO)
+                .orElseThrow(() -> new EmisException(String.format("Course with Id %s couldn't be found", courseId)));
         List<StudentCourse> studentCourses = studentCourseRepository.findByCourseId(courseId);
         List<StudentInfoDTO> studentInfos = new ArrayList<>();
         if (studentCourses != null && !studentCourses.isEmpty()) {
             studentCourses.forEach(studentCourse -> studentInfoMapper.toDTO(studentCourse.getStudent()));
         }
-        CourseDTO courseDTO = course.map(courseMapper::toDTO).orElse(null);
         CourseDetailsForTeacherDTO courseDetails = new CourseDetailsForTeacherDTO();
-        courseDetails.setCourse(courseDTO);
+        courseDetails.setCourse(course);
         courseDetails.setStudents(studentInfos);
         return courseDetails;
     }
 
     @Override
-    public CourseDetailsForStudentDTO getCourseDetailsForStudent(Long courseId, Long studentId) {
+    public CourseDetailsForStudentDTO getCourseDetailsForStudent(Long courseId, Long studentId) throws EmisException {
         Optional<Course> courseOptional = courseRepository.findById(courseId);
-        CourseDTO course = courseOptional.map(courseMapper::toDTO).orElse(null);
+        CourseDTO course = courseOptional.map(courseMapper::toDTO)
+                .orElseThrow(() -> new EmisException(String.format("Course with Id %s couldn't be found", courseId)));
         CourseDetailsForStudentDTO courseDetails = new CourseDetailsForStudentDTO();
         courseDetails.setCourse(course);
         courseDetails.setStudentGradeInfo(getStudentGrades(courseId, studentId));
         return courseDetails;
     }
 
-    private List<StudentGradeDTO> getStudentGrades(Long courseId, Long studentId) {
+    private List<StudentGradeDTO> getStudentGrades(Long courseId, Long studentId) throws EmisException {
         Optional<StudentCourse> studentCourseOptional = studentCourseRepository.findByStudentAndCourse(studentId, courseId);
-        StudentCourse studentCourse = studentCourseOptional.orElse(null);
+        StudentCourse studentCourse = studentCourseOptional.
+                orElseThrow(() -> new EmisException(
+                        String.format("Student with id %s doesn't have a course with id %s", studentId, courseId)));
         List<StudentGradeDTO> studentGrades = new ArrayList<>();
-        if (studentCourse != null) {
-            studentCourse.getGradeComponents().
+        studentCourse.getGradeComponents().
                     forEach(grade -> studentGrades.add(studentGradeMapper.toDTO(grade)));
-        }
         return studentGrades;
     }
 

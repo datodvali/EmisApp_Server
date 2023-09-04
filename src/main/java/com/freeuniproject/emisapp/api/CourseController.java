@@ -4,6 +4,7 @@ import com.freeuniproject.emisapp.dto.CourseDTO;
 import com.freeuniproject.emisapp.dto.CourseDetailsForStudentDTO;
 import com.freeuniproject.emisapp.dto.CourseDetailsForTeacherDTO;
 import com.freeuniproject.emisapp.dto.SyllabusDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.service.CourseService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,18 +25,13 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @GetMapping
-    public CourseDTO getCourse(@RequestParam Long id) {
-        return courseService.getCourse(id);
-    }
-
     @GetMapping("/detailsForTeacher")
-    public CourseDetailsForTeacherDTO getCourseDetailsForTeacher(@RequestParam Long courseId) {
+    public CourseDetailsForTeacherDTO getCourseDetailsForTeacher(@RequestParam Long courseId) throws EmisException {
         return courseService.getCourseDetailsForTeacher(courseId);
     }
 
     @GetMapping("/detailsForStudent")
-    public CourseDetailsForStudentDTO getCourseDetailsForStudent(@RequestParam Long courseId, @RequestParam Long studentId) {
+    public CourseDetailsForStudentDTO getCourseDetailsForStudent(@RequestParam Long courseId, @RequestParam Long studentId) throws EmisException {
         return courseService.getCourseDetailsForStudent(courseId, studentId);
     }
 
