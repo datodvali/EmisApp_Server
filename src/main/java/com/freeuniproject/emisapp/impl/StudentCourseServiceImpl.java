@@ -4,6 +4,7 @@ import com.freeuniproject.emisapp.domain.*;
 import com.freeuniproject.emisapp.dto.CourseInfoForStudentDTO;
 import com.freeuniproject.emisapp.dto.StudentCourseDTO;
 import com.freeuniproject.emisapp.dto.StudentGradeDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
 import com.freeuniproject.emisapp.mapper.StudentCourseMapper;
 import com.freeuniproject.emisapp.mapper.StudentGradeMapper;
@@ -73,14 +74,18 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     }
 
     @Override
-    public void registerStudentForCourse(Long studentId, Long courseId) {
+    public void registerStudentForCourse(Long studentId, Long courseId) throws EmisException {
         Optional<Student> studentOptional = studentRepository.findById(studentId);
         Optional<Course> courseOptional = courseRepository.findById(courseId);
-        if (studentOptional.isEmpty() || courseOptional.isEmpty()) {
-            return;
+        if (studentOptional.isEmpty()) {
+            throw new EmisException(String.format("Student with id %s couldn't be found", studentId));
+        }
+        if (courseOptional.isEmpty()) {
+            throw new EmisException(String.format("Course with id %s couldn't be found", studentId));
         }
         studentCourseRepository.save(
-                Objects.requireNonNull(createStudentCourseEntity(studentOptional.get(), courseOptional.get())));
+                createStudentCourseEntity(studentOptional.get(), courseOptional.get())
+        );
     }
 
     private StudentCourse createStudentCourseEntity(Student student, Course course) {
@@ -107,7 +112,7 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     public List<CourseInfoForStudentDTO> getRegisteredCoursesForStudent(Long studentId) {
         Optional<Student> studentOptional = studentRepository.findById(studentId);
         if (studentOptional.isEmpty()) {
-            return null;
+            return Collections.emptyList();
         }
         return studentCourseRepository
                 .findByStudentAndSemester(studentId, studentOptional.get().getSemester())

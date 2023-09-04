@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.dto.CourseInfoForStudentDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.service.CourseService;
 import com.freeuniproject.emisapp.service.StudentCourseService;
 import org.springframework.data.domain.Page;
@@ -34,7 +35,7 @@ public class CourseRegistrationController {
     }
 
     @PostMapping("/register")
-    public void registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
+    public void registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) throws EmisException {
         studentCourseService.registerStudentForCourse(studentId, courseId);
     }
 
