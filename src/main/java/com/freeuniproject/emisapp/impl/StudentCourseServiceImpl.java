@@ -52,22 +52,18 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     }
 
     @Override
-    public List<List<StudentCourseDTO>> getStudentCourses(Long studentId) {
+    public List<List<StudentCourseDTO>> getStudentCourses(Long studentId) throws EmisException {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        Student student = studentOptional.orElseThrow(() -> new EmisException(String.format("Couldn't find student with id %s", studentId)));
         List<StudentCourse> studentCourses = studentCourseRepository.findByStudentId(studentId);
-        return getCoursesBySemester(studentCourses);
-    }
-
-    @Override
-    public List<StudentCourseDTO> getStudentsInfoForCourse(Long courseId) {
-//        return studentSubjectRepository.findByClassId(classId);
-        return null;
+        return getCoursesBySemester(studentCourses, student.getSemester());
     }
 
     @Override
     public List<StudentGradeDTO> getStudentGradeInfo(Long studentId, Long courseId) {
         Optional<StudentCourse> optionalStudentCourse = studentCourseRepository.findByStudentAndCourse(studentId, courseId);
         if (optionalStudentCourse.isEmpty()) {
-            return null;
+            return Collections.emptyList();
         }
         StudentCourse studentCourse = optionalStudentCourse.get();
         return studentCourse.getGradeComponents().stream().map(studentGradeMapper::toDTO).collect(Collectors.toList());
@@ -126,13 +122,12 @@ public class StudentCourseServiceImpl implements StudentCourseService {
         studentCourseRepository.deleteByStudent_IdAndCourse_Id(studentId, courseId);
     }
 
-    private List<List<StudentCourseDTO>> getCoursesBySemester(List<StudentCourse> studentCourses) {
+    private List<List<StudentCourseDTO>> getCoursesBySemester(List<StudentCourse> studentCourses, int maxSemester) {
         List<List<StudentCourseDTO>> subjectsBySemester = new ArrayList<>();
 
         Map<Integer, List<StudentCourse>> semesterSubjectMap = studentCourses.stream()
                 .collect(Collectors.groupingBy(StudentCourse::getSemester));
 
-        int maxSemester = semesterSubjectMap.keySet().stream().max(Integer::compareTo).orElse(1);
         IntStream.rangeClosed(1, maxSemester)
                 .forEach(semester -> subjectsBySemester.add(studentCourseMapper.toDTOs(semesterSubjectMap.get(semester))));
 

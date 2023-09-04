@@ -4,6 +4,7 @@ package com.freeuniproject.emisapp.impl;
 import com.freeuniproject.emisapp.domain.DashboardComponent;
 import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.StudentDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.StudentMapper;
 import com.freeuniproject.emisapp.repository.StudentRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
@@ -32,9 +33,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getStudent(Long id) {
+    public StudentDTO getStudent(Long id) throws EmisException {
         return studentRepository.findById(id)
-                .map(studentMapper::toDTO).orElse(null);
+                .map(studentMapper::toDTO)
+                .orElseThrow(() -> new EmisException(String.format("Student with id %s couldn't be found", id)));
     }
 
     @Override

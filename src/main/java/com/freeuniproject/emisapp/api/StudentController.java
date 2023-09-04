@@ -2,6 +2,7 @@ package com.freeuniproject.emisapp.api;
 
 import com.freeuniproject.emisapp.domain.StudentStatus;
 import com.freeuniproject.emisapp.dto.*;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
 import com.freeuniproject.emisapp.service.StudentGradeService;
 import com.freeuniproject.emisapp.service.StudentService;
@@ -30,7 +31,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public StudentDTO getStudent(@RequestParam Long studentId) {
+    public StudentDTO getStudent(@RequestParam Long studentId) throws EmisException {
         return studentService.getStudent(studentId);
     }
 
@@ -40,12 +41,12 @@ public class StudentController {
     }
 
     @GetMapping("/finances")
-    public StudentFinancesDTO getStudentFinances(@RequestParam Long studentId) {
+    public StudentFinancesDTO getStudentFinances(@RequestParam Long studentId) throws EmisException {
         return studentFinancesService.getStudentFinancesByStudentId(studentId);
     }
 
     @GetMapping("/courses")
-    public List<List<StudentCourseDTO>> getStudentCourses(@RequestParam Long studentId) {
+    public List<List<StudentCourseDTO>> getStudentCourses(@RequestParam Long studentId) throws EmisException {
         return studentCourseService.getStudentCourses(studentId);
     }
 

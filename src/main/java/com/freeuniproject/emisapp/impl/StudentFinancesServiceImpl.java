@@ -1,6 +1,7 @@
 package com.freeuniproject.emisapp.impl;
 
 import com.freeuniproject.emisapp.dto.StudentFinancesDTO;
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.StudentFinancesMapper;
 import com.freeuniproject.emisapp.repository.StudentFinancesRepository;
 import com.freeuniproject.emisapp.service.StudentFinancesService;
@@ -19,9 +20,10 @@ public class StudentFinancesServiceImpl implements StudentFinancesService {
     }
 
     @Override
-    public StudentFinancesDTO getStudentFinancesByStudentId(Long studentId) {
+    public StudentFinancesDTO getStudentFinancesByStudentId(Long studentId) throws EmisException {
         return studentFinancesRepository.getStudentFinancesByStudentId(studentId)
-                .map(studentFinancesMapper::toDTO).orElse(null);
+                .map(studentFinancesMapper::toDTO)
+                .orElseThrow(() -> new EmisException(String.format("Couldn't find finance information for student with id %s", studentId)));
     }
 
 }

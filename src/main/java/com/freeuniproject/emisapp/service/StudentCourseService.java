@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface StudentCourseService {
 
-    List<List<StudentCourseDTO>> getStudentCourses(Long studentId);
-
-    List<StudentCourseDTO> getStudentsInfoForCourse(Long classId);
+    List<List<StudentCourseDTO>> getStudentCourses(Long studentId) throws EmisException;
 
     List<StudentGradeDTO> getStudentGradeInfo(Long studentId, Long courseId);
 
