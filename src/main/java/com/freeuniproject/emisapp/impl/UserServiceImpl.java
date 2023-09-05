@@ -1,5 +1,6 @@
 package com.freeuniproject.emisapp.impl;
 
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.repository.StudentRepository;
 import com.freeuniproject.emisapp.repository.TeacherRepository;
 import com.freeuniproject.emisapp.repository.UserRepository;
@@ -22,8 +23,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePhoneNumber(Long id, String phoneNumber) {
+    public void updatePhoneNumber(Long id, String phoneNumber) throws EmisException {
+        validatePhoneNumber(phoneNumber);
         userRepository.updatePhoneNumber(id, phoneNumber);
+    }
+
+    private void validatePhoneNumber(String phoneNumber) throws EmisException {
+        if (!phoneNumber.matches("\\d+") || phoneNumber.length() != 9 || phoneNumber.charAt(0) != '5') {
+            throw new EmisException(String.format("String passed as a phone number is not in the correct format: %s", phoneNumber));
+        }
     }
 
     @Override

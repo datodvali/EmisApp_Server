@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    @Query("SELECT c FROM Course c Where c.subject.name like %:subjectName%")
+    @Query("SELECT c FROM Course c Where LOWER(c.subject.name) like LOWER(CONCAT('%', :subjectName, '%'))")
     Page<Course> filterCourses(@Param("subjectName") String subjectName, Pageable pageable);
 
 }

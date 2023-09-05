@@ -1,5 +1,6 @@
 package com.freeuniproject.emisapp.api;
 
+import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @PutMapping("/update/phoneNumber")
-    public boolean updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
+    public boolean updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) throws EmisException {
         userService.updatePhoneNumber(id, phoneNumber);
         return true;
     }
