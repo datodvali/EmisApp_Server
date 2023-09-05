@@ -1,9 +1,6 @@
 package com.freeuniproject.emisapp.impl;
 
-import com.freeuniproject.emisapp.domain.Course;
-import com.freeuniproject.emisapp.domain.StudentCourse;
-import com.freeuniproject.emisapp.domain.Subject;
-import com.freeuniproject.emisapp.domain.Syllabus;
+import com.freeuniproject.emisapp.domain.*;
 import com.freeuniproject.emisapp.dto.*;
 import com.freeuniproject.emisapp.exception.EmisException;
 import com.freeuniproject.emisapp.mapper.*;
@@ -59,12 +56,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Page<CourseInfoForStudentDTO> filterCoursesForStudent(Long studentId, String subjectName, Pageable pageable) {
         Page<Course> resultPage = courseRepository.filterCourses(subjectName, pageable);
-        if (resultPage.isEmpty()) {
-            return Page.empty();
-        }
-        List<CourseInfoForStudentDTO> courseInfos = resultPage.stream().map(course -> courseInfoForStudent(studentId, course))
-                .collect(Collectors.toList());
-        return new PageImpl<>(courseInfos, PageRequest.of(pageable.getPageNumber(), courseInfos.size()), resultPage.getTotalElements());
+        return resultPage.map(course -> courseInfoForStudent(studentId, course));
     }
 
     @Override
@@ -81,7 +73,7 @@ public class CourseServiceImpl implements CourseService {
         List<StudentCourse> studentCourses = studentCourseRepository.findByCourseId(courseId);
         List<StudentInfoDTO> studentInfos = new ArrayList<>();
         if (studentCourses != null && !studentCourses.isEmpty()) {
-            studentCourses.forEach(studentCourse -> studentInfoMapper.toDTO(studentCourse.getStudent()));
+            studentCourses.forEach(studentCourse -> studentInfos.add(studentInfoMapper.toDTO(studentCourse.getStudent())));
         }
         CourseDetailsForTeacherDTO courseDetails = new CourseDetailsForTeacherDTO();
         courseDetails.setCourse(course);

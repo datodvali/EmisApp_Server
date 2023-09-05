@@ -35,13 +35,15 @@ public class CourseRegistrationController {
     }
 
     @PostMapping("/register")
-    public void registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) throws EmisException {
+    public boolean registerCourse(@RequestParam Long studentId, @RequestParam Long courseId) throws EmisException {
         studentCourseService.registerStudentForCourse(studentId, courseId);
+        return true;
     }
 
     @DeleteMapping("/deleteRegisteredCourse")
-    public void deleteCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
+    public boolean deleteCourse(@RequestParam Long studentId, @RequestParam Long courseId) {
         studentCourseService.deleteStudentCourse(studentId, courseId);
+        return true;
     }
 
 }

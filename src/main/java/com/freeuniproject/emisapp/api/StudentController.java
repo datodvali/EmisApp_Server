@@ -56,8 +56,9 @@ public class StudentController {
     }
 
     @PutMapping("/update/mark")
-    public void updateStudentMark(@RequestParam Long studentGradeId, @RequestParam Double mark) {
+    public boolean updateStudentMark(@RequestParam Long studentGradeId, @RequestParam Double mark) {
         studentGradeService.updateStudentMark(studentGradeId, mark);
+        return true;
     }
 
 }

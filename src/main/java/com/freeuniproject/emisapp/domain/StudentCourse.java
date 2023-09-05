@@ -2,8 +2,8 @@ package com.freeuniproject.emisapp.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.List;
 
@@ -35,6 +35,9 @@ public class StudentCourse {
 
     @Column(columnDefinition = "boolean default false")
     private boolean passed;
+
+    @ColumnDefault("false")
+    private boolean necessary;
 
     @OneToMany(mappedBy = "studentCourse", cascade = CascadeType.ALL)
     private List<StudentGrade> gradeComponents;
