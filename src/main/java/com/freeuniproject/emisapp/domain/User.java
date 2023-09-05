@@ -31,6 +31,8 @@ public class User {
 
     private String phoneNumber;
 
+    private String password;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Student student;
 

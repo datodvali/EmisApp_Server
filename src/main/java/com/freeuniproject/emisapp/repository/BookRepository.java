@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("SELECT b FROM Book b WHERE b.title LIKE %:title% AND b.author LIKE %:author%")
+    @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE %LOWER(:title)% AND LOWER(b.author) LIKE %LOWER(:author)%")
     Page<Book> findBooksByTitleAndAuthor(@Param("title") String title, @Param("author") String author, Pageable pageable);
 
     @Query("SELECT b FROM Book b WHERE b.title LIKE %:title% AND b.author LIKE %:author%")
