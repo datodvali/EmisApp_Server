@@ -3,6 +3,7 @@ package com.freeuniproject.emisapp.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Teacher {
     @Enumerated(EnumType.STRING)
     private TeacherStatus status;
 
-    @Column(columnDefinition = "double default 0.0")
+    @ColumnDefault("0.0")
     private double salary;
 
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
