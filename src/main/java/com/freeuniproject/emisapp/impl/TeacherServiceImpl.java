@@ -39,7 +39,6 @@ public class TeacherServiceImpl implements TeacherService {
         // TODO actual implementation
         return List.of(
                 DashboardComponent.SUBJECT_CARD_FOR_TEACHER,
-                DashboardComponent.SUBJECT_HISTORY_FOR_TEACHER,
                 DashboardComponent.LIBRARY
         );
     }

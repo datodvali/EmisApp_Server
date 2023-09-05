@@ -19,7 +19,7 @@ public class TeacherDTO {
 
     private String lastName;
 
-    private Date birthDate;
+    private String birthDate;
 
     private String email;
 
@@ -27,7 +27,7 @@ public class TeacherDTO {
 
     private String phoneNumber;
 
-    private TeacherPosition position;
+    private String position;
 
     private TeacherStatus status;
 

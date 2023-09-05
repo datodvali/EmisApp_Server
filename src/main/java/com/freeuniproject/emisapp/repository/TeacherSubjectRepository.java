@@ -14,7 +14,7 @@ public interface TeacherSubjectRepository extends JpaRepository<TeacherCourse, L
 
     List<TeacherCourse> findByTeacherId(long teacherId);
 
-    @Query("SELECT t FROM TeacherCourse t WHERE t.course.finished = TRUE AND t.teacher.id = :teacherId")
-    List<TeacherCourse> findFinishedCoursesForTeacher(@Param("teacherId") long teacherId);
+    @Query("SELECT t FROM TeacherCourse t WHERE t.course.finished = FALSE AND t.teacher.id = :teacherId")
+    List<TeacherCourse> findUnfinishedCoursesForTeacher(@Param("teacherId") long teacherId);
 
 }

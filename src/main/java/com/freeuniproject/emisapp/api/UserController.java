@@ -24,13 +24,15 @@ public class UserController {
     }
 
     @PutMapping("/update/phoneNumber")
-    public void updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
+    public boolean updatePhoneNumber(@RequestParam Long id, @RequestParam String phoneNumber) {
         userService.updatePhoneNumber(id, phoneNumber);
+        return true;
     }
 
     @PutMapping("/update/password")
-    public void updatePassword(@RequestParam Long id, @RequestParam String password) {
+    public boolean updatePassword(@RequestParam Long id, @RequestParam String password) {
         userService.updatePassword(id, password);
+        return true;
     }
 
 

@@ -1,6 +1,5 @@
 package com.freeuniproject.emisapp.impl;
 
-import com.freeuniproject.emisapp.dto.CourseInfoDTO;
 import com.freeuniproject.emisapp.dto.CourseInfoForTeacherDTO;
 import com.freeuniproject.emisapp.dto.TeacherCourseDTO;
 import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
@@ -30,7 +29,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
     @Override
     public List<CourseInfoForTeacherDTO> getTeacherCourses(Long teacherId) {
         return teacherSubjectRepository
-                .findFinishedCoursesForTeacher(teacherId)
+                .findUnfinishedCoursesForTeacher(teacherId)
                 .stream()
                 .map(teacherCourse -> courseInfoMapper.toCourseInfoForTeacherDTO(teacherCourse.getCourse()))
                 .collect(Collectors.toList());
