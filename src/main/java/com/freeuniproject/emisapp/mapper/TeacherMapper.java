@@ -25,7 +25,7 @@ public interface TeacherMapper {
 
     @Named("dateMapper")
     default String dateMapper(Date birthDate) {
-        return birthDate.toString();
+        return birthDate.toString().split(" ")[0];
     }
 
 }

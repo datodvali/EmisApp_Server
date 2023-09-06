@@ -42,8 +42,9 @@ public class TeacherController {
     }
 
     @PutMapping("/status")
-    public void updateStatus(@RequestParam Long teacherId, @RequestParam TeacherStatus status) {
+    public boolean updateStatus(@RequestParam Long teacherId, @RequestParam TeacherStatus status) {
         teacherService.updateStatus(teacherId, status);
+        return true;
     }
 
 }
