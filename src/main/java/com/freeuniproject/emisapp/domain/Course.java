@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor
 @Setter
@@ -20,7 +21,8 @@ public class Course {
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;
 
-    private int year;
+    @ColumnDefault("0")
+    private int studyYear;
 
     private int semester;
 

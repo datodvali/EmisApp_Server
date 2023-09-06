@@ -7,9 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TeacherSubjectRepository extends JpaRepository<TeacherCourse, Long> {
+public interface TeacherCourseRepository extends JpaRepository<TeacherCourse, Long> {
 
-    @Query("SELECT t FROM TeacherCourse t WHERE t.teacher.id = :teacherId AND t.course.year = :year AND t.course.semester = :semester")
+    @Query("SELECT t FROM TeacherCourse t WHERE t.teacher.id = :teacherId AND t.course.studyYear = :year AND t.course.semester = :semester")
     List<TeacherCourse> findByTeacherYearAndSemester(@Param("teacherId") long teacherId, @Param("year") int year, @Param("semester") int semester);
 
     List<TeacherCourse> findByTeacherId(long teacherId);

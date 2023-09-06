@@ -19,14 +19,4 @@ public interface StudentMapper {
     })
     StudentDTO toDTO(Student student);
 
-    @Mappings({
-            @Mapping(source = "firstName", target = "user.firstName"),
-            @Mapping(source = "lastName", target = "user.lastName"),
-            @Mapping(source = "birthDate", target = "user.birthDate"),
-            @Mapping(source = "email", target = "user.email"),
-            @Mapping(source = "phoneNumber", target = "user.phoneNumber"),
-            @Mapping(source = "address", target = "user.address")
-    })
-    Student fromDTO(StudentDTO dto);
-
 }

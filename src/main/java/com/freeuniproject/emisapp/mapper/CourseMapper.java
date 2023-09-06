@@ -13,6 +13,7 @@ public interface CourseMapper {
             @Mapping(source = "subject.name", target = "courseName"),
             @Mapping(source = "subject.code", target = "subjectCode"),
             @Mapping(source = "subject.description", target = "subjectDescription"),
+            @Mapping(source = "studyYear", target = "year")
     })
     CourseDTO toDTO(Course course);
 

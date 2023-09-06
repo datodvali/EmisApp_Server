@@ -4,7 +4,7 @@ import com.freeuniproject.emisapp.dto.CourseInfoForTeacherDTO;
 import com.freeuniproject.emisapp.dto.TeacherCourseDTO;
 import com.freeuniproject.emisapp.mapper.CourseInfoMapper;
 import com.freeuniproject.emisapp.mapper.TeacherCourseMapper;
-import com.freeuniproject.emisapp.repository.TeacherSubjectRepository;
+import com.freeuniproject.emisapp.repository.TeacherCourseRepository;
 import com.freeuniproject.emisapp.service.TeacherCourseService;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +14,21 @@ import java.util.stream.Collectors;
 @Service
 public class TeacherCourseServiceImpl implements TeacherCourseService {
 
-    private final TeacherSubjectRepository teacherSubjectRepository;
+    private final TeacherCourseRepository teacherCourseRepository;
 
     private final TeacherCourseMapper teacherCourseMapper;
 
     private final CourseInfoMapper courseInfoMapper;
 
-    public TeacherCourseServiceImpl(TeacherSubjectRepository teacherSubjectRepository, TeacherCourseMapper teacherCourseMapper, CourseInfoMapper courseInfoMapper) {
-        this.teacherSubjectRepository = teacherSubjectRepository;
+    public TeacherCourseServiceImpl(TeacherCourseRepository teacherCourseRepository, TeacherCourseMapper teacherCourseMapper, CourseInfoMapper courseInfoMapper) {
+        this.teacherCourseRepository = teacherCourseRepository;
         this.teacherCourseMapper = teacherCourseMapper;
         this.courseInfoMapper = courseInfoMapper;
     }
 
     @Override
     public List<CourseInfoForTeacherDTO> getTeacherCourses(Long teacherId) {
-        return teacherSubjectRepository
+        return teacherCourseRepository
                 .findUnfinishedCoursesForTeacher(teacherId)
                 .stream()
                 .map(teacherCourse -> courseInfoMapper.toCourseInfoForTeacherDTO(teacherCourse.getCourse()))
@@ -37,7 +37,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
 
     @Override
     public List<TeacherCourseDTO> getTeachingHistory(Long id) {
-        return teacherSubjectRepository.findByTeacherId(id).stream()
+        return teacherCourseRepository.findByTeacherId(id).stream()
                 .map(teacherCourseMapper::toDTO).collect(Collectors.toList());
     }
 
